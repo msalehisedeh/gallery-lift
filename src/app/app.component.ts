@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'gallery lift';
   events: string[] = [];
+  viewOption = 'large-on-right';
 
   myGallery= [{
     data: {

@@ -15,7 +15,6 @@ DEPENDENCIES:
 
 ```javascript
 <gallery-lift
-  preview="3"
   layout="large-on-sides"
   [template]="myTeplate"
   [gallery]="myGallery"
@@ -27,7 +26,6 @@ DEPENDENCIES:
 
 | Attribute       |Details                                                                                |
 |-----------------|---------------------------------------------------------------------------------------|
-|preview          | Number of items to be displayed in preview pane.                                      |
 |template         | template to be used to display detail information about an item.                      |
 |gallery          | List of items to be in the display gallery.                                           |
 |layout           | How to display items in the preview pane. options are 'large-on-single', 'split-on-dual', 'large-on-right', 'split-on-quadruple', 'large-on-middle', 'large-on-left', 'large-on-sides'           |
@@ -50,7 +48,8 @@ You can register to receive the following events:
 
 | Event       |Details                                                                                    |
 |-------------|-------------------------------------------------------------------------------------------|
-|onselect     | published when  `{action, index}`                                                         |
+|onselect     | published when a preview entry selected  `{action, index}`                                |
+|onaction     | published when a selected entry viewed or action performed on it `{action, index, date}`  |
 
 ## Sample data
 
@@ -94,6 +93,7 @@ You can register to receive the following events:
 
 | Version | Description                                                                                   |
 |---------|-----------------------------------------------------------------------------------------------|
+| 1.0.1   | Removed unused attribute. Added event handling on mouse over and play video.                  |
 | 1.0.0   | Initial release.                                                                              |
 
 

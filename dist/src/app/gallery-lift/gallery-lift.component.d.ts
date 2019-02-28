@@ -6,14 +6,18 @@ export declare class GalleryLiftComponent implements OnChanges {
     liftup: boolean;
     focused: boolean;
     onselect: EventEmitter<{}>;
+    onaction: EventEmitter<{}>;
     gallery: any[];
-    preview: number;
     template: any;
     layout: string;
     ngOnChanges(changes: any): void;
     liftUpImagery(index: number): void;
     liftDownImagery(): void;
     fullScreen(): void;
+    previous(): void;
+    next(): void;
+    videoEvent(event: any): void;
+    hoverOver(event: any): void;
     showMore(closeButton: any): boolean;
     keyup(event: any): void;
 }

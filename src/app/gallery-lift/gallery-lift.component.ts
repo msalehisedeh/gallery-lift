@@ -20,9 +20,9 @@ export class GalleryLiftComponent implements OnChanges {
   focused = false;
   
   @Output() onselect= new EventEmitter()
+  @Output() onaction= new EventEmitter()
 
   @Input() gallery: any[];
-  @Input() preview = 3;
   @Input() template: any;
   @Input() layout = 'large-on-single';
   
@@ -58,6 +58,49 @@ export class GalleryLiftComponent implements OnChanges {
   fullScreen() {
 
   }
+  previous() {
+    this.selectedIndex = this.selectedIndex - 1;
+    this.onaction.emit({
+      action: "view previous",
+      index: this.selectedIndex,
+			time: new Date()
+		});
+  }
+  next() {
+    this.selectedIndex = this.selectedIndex + 1;
+    this.onaction.emit({
+      action: "view next",
+      index: this.selectedIndex,
+			time: new Date()
+		});
+  }
+  videoEvent(event: any) {
+    this.onaction.emit({
+      action: event.type,
+      index: this.selectedIndex,
+      time: new Date(),
+      item: {
+        autoplay: event.target.autoplay,
+        controls: event.target.controls,
+        duration: event.target.duration,
+        ended: event.target.ended,
+        error: event.target.error,
+        paused: event.target.paused,
+        muted: event.target.muted,
+        currentTime: event.target.currentTime,
+        volume: event.target.volume
+      }
+    });
+  }
+  hoverOver(event: any) {
+	this.onaction.emit({
+		action: event.type,
+		index: this.selectedIndex,
+		time: new Date()
+	});
+  }
+
+
   showMore(closeButton) {
     if (!this.focused) {
       this.focused = true;
