@@ -1,0 +1,21 @@
+
+.logger {
+    border: 1px solid #888;
+    background-color: #eee;
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: block;
+    max-height: 222px;
+    overflow-y: auto;
+    position: relative;
+}
+.resources {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #551234;
+    font-weight: bold;
+}
+gallery-lift {
+    width: 80%;
+    margin: 0 auto;
+}
