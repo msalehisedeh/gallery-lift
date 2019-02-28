@@ -1,0 +1,52 @@
+{
+  "name": "@sedeh/gallery-lift",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "angular 6+",
+    "Photo Gallery",
+    "Video Gallery",
+    "Photo viewer",
+    "Media viewer",
+    "configurable",
+    "flexible",
+    "ADA compliant",
+    "easy to use",
+    "best"
+  ],
+  "dependencies": {
+    "font-awesome": "^4.7.0",
+    "tslib": "^1.9.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^0.12.4",
+    "@angular/cli": "^6.2.9",
+    "@angular/common": "^6.0.0",
+    "@angular/compiler": "^6.0.0",
+    "@angular/compiler-cli": "^6.0.0",
+    "@angular/core": "^6.0.0",
+    "@angular/forms": "^6.1.10",
+    "@angular/platform-browser": "^6.0.0",
+    "@types/node": "^6.14.3",
+    "codelyzer": "~4.5.0",
+    "core-js": "^2.6.5",
+    "ng-packagr": "^4.7.1",
+    "protractor": "~5.4.2",
+    "rxjs": "6.2.2",
+    "ts-node": "~5.0.1",
+    "tslint": "~5.7.0",
+    "typescript": "~2.7.2",
+    "zone.js": "^0.8.29"
+  },
+  "main": "bundles/sedeh-gallery-lift.umd.js",
+  "module": "fesm5/sedeh-gallery-lift.js",
+  "es2015": "fesm2015/sedeh-gallery-lift.js",
+  "esm5": "esm5/sedeh-gallery-lift.js",
+  "esm2015": "esm2015/sedeh-gallery-lift.js",
+  "fesm5": "fesm5/sedeh-gallery-lift.js",
+  "fesm2015": "fesm2015/sedeh-gallery-lift.js",
+  "typings": "sedeh-gallery-lift.d.ts",
+  "metadata": "sedeh-gallery-lift.metadata.json",
+  "sideEffects": false
+}

@@ -1,0 +1,8 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ */
+export { GalleryLiftComponent } from './src/app/gallery-lift/gallery-lift.component';
+export { GalleryLiftModule } from './src/app/gallery-lift/gallery-lift.module';
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzZWRlaC9nYWxsZXJ5LWxpZnQvIiwic291cmNlcyI6WyJwdWJsaWNfYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQUUsb0JBQW9CLEVBQUUsTUFBTSwrQ0FBK0MsQ0FBQztBQUNyRixPQUFPLEVBQUUsaUJBQWlCLEVBQUUsTUFBTSw0Q0FBNEMsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCB7IEdhbGxlcnlMaWZ0Q29tcG9uZW50IH0gZnJvbSAnLi9zcmMvYXBwL2dhbGxlcnktbGlmdC9nYWxsZXJ5LWxpZnQuY29tcG9uZW50JztcclxuZXhwb3J0IHsgR2FsbGVyeUxpZnRNb2R1bGUgfSBmcm9tICcuL3NyYy9hcHAvZ2FsbGVyeS1saWZ0L2dhbGxlcnktbGlmdC5tb2R1bGUnOyJdfQ==
