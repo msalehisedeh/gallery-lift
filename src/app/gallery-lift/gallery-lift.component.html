@@ -13,6 +13,7 @@
         </span>
         <img *ngIf="gallery[i].type === 'image'" aria-hidden="true" width="100%" height="100%" [src]="gallery[i].src" />
         <video *ngIf="gallery[i].type === 'video'" width="100%" [attr.src]="gallery[i].src" disabled></video>
+        <div *ngIf="showRemainingCount && i === (layList.length - 1)" class="counter">+ {{gallery.length - i - 1}}</div>
         <div class="more">See more...</div>
     </div>
 </div>

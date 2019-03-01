@@ -16,6 +16,8 @@ DEPENDENCIES:
 ```javascript
 <gallery-lift
   layout="large-on-sides"
+  [liftOnZero]="true"
+  [showRemainingCount]="true"
   [template]="myTeplate"
   [gallery]="myGallery"
   (onselect)="onselect($event)"></gallery-lift>
@@ -28,6 +30,8 @@ DEPENDENCIES:
 |-----------------|---------------------------------------------------------------------------------------|
 |template         | template to be used to display detail information about an item.                      |
 |gallery          | List of items to be in the display gallery.                                           |
+|liftOnZero       | Start from zero index when lifting the gallery or from te index of clicked on entry.  |
+|showRemainingCount| Show the remaining number of entries on last item of preview pane.                   |
 |layout           | How to display items in the preview pane. options are 'large-on-single', 'split-on-dual', 'large-on-right', 'split-on-quadruple', 'large-on-middle', 'large-on-left', 'large-on-sides'           |
 
 ## Layouts
@@ -93,6 +97,7 @@ You can register to receive the following events:
 
 | Version | Description                                                                                   |
 |---------|-----------------------------------------------------------------------------------------------|
+| 1.0.2   | Fixed a few CSS issues. Added liftOnZero attribute to enforce lift policy and showRemainingCount attribute to show remaining number of entries in the list. |
 | 1.0.1   | Removed unused attribute. Added event handling on mouse over and play video.                  |
 | 1.0.0   | Initial release.                                                                              |
 

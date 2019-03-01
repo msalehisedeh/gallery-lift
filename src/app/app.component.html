@@ -10,7 +10,7 @@
 </div>
 <div class="controllers">
   <fieldset>
-    <legend>Preview Options</legend>
+    <legend>Preview Layout Options</legend>
     <label for="large-on-single"><input id="large-on-single" name="viewOption" type="radio" [checked]="viewOption === 'large-on-single'" (click)="viewOption = 'large-on-single'" />large-on-single</label>
     <label for="split-on-dual"><input id="split-on-dual" name="viewOption" type="radio" [checked]="viewOption === 'split-on-dual'" (click)="viewOption = 'split-on-dual'" />split-on-dual</label>
     <label for="large-on-right"><input id="large-on-right" name="viewOption" type="radio" [checked]="viewOption === 'large-on-right'" (click)="viewOption = 'large-on-right'" />large-on-right</label>
@@ -19,10 +19,23 @@
     <label for="large-on-left"><input id="large-on-left" name="viewOption" type="radio" [checked]="viewOption === 'large-on-left'" (click)="viewOption = 'large-on-left'" />large-on-left</label>
     <label for="large-on-sides"><input id="large-on-sides" name="viewOption" type="radio" [checked]="viewOption === 'large-on-sides'" (click)="viewOption = 'large-on-sides'" />large-on-sides</label>
   </fieldset>
-  </div>
+  <fieldset>
+    <legend>Lift policy</legend>
+    <label for="liftOnZero">
+      <input id="liftOnZero" name="liftOnZero" type="checkbox" [checked]="liftOnZero === true" (change)="liftOnZero = !liftOnZero" />
+      Lift On Zero
+    </label>
+    <label for="showRemainingCount">
+      <input id="showRemainingCount" name="showRemainingCount" type="checkbox" [checked]="showRemainingCount === true" (change)="showRemainingCount = !showRemainingCount" />
+      Show Remaining Count
+    </label>
+  </fieldset>
+</div>
   
 <gallery-lift
   [layout]="viewOption"
+  [liftOnZero]="liftOnZero"
+  [showRemainingCount]="showRemainingCount"
   [template]="myTeplate"
   [gallery]="myGallery"
   (onaction)="onaction($event)"

@@ -9,6 +9,8 @@ export class AppComponent {
   title = 'gallery lift';
   events: string[] = [];
   viewOption = 'large-on-right';
+  liftOnZero = true;
+  showRemainingCount = true;
 
   myGallery= [{
     data: {

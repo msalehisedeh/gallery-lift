@@ -101,16 +101,16 @@
   .viewport {
     display: inline-grid;
     grid-gap: 0;
-    background-color: #2196F3;
+    background-color: #000;
     padding: 0;
     div {
-      background-color: rgba(255, 255, 255, 0.8);
       text-align: center;
       padding: 0;
-      font-size: 30px;
       position: relative;
-      background-size: cover;
-      background-position: center;
+      box-sizing: border-box;
+      img, video {
+        object-fit: cover;
+      }
       cursor: pointer;
       &:hover,
       &:focus {
@@ -123,7 +123,16 @@
           display: inline;
         }
       }
-
+      .counter {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(100,100,100,0.8);
+        color: #fff;
+        position: absolute;
+        top: 0;
+        font-size: 4rem;
+        padding: 25% 0;
+      }
       .more {
         display: none;
         width: 100%;

@@ -10,8 +10,8 @@
     position: relative;
 }
 .controllers {
-    width: 100%;
     display: table;
+    margin: 0 auto;
     fieldset {
         box-sizing: border-box;
         display: table;
@@ -27,6 +27,6 @@
     font-weight: bold;
 }
 gallery-lift {
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
 }

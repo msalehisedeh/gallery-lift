@@ -22,6 +22,8 @@ export class GalleryLiftComponent implements OnChanges {
   @Output() onselect= new EventEmitter()
   @Output() onaction= new EventEmitter()
 
+  @Input() liftOnZero = false;
+  @Input() showRemainingCount = false;
   @Input() gallery: any[];
   @Input() template: any;
   @Input() layout = 'large-on-single';
@@ -40,7 +42,7 @@ export class GalleryLiftComponent implements OnChanges {
     }
   }
   liftUpImagery(index: number) {
-    this.selectedIndex = index;
+    this.selectedIndex = this.liftOnZero ? 0 : index;
     this.liftup = true;
     this.onselect.emit({
       index: this.selectedIndex,
@@ -93,13 +95,19 @@ export class GalleryLiftComponent implements OnChanges {
     });
   }
   hoverOver(event: any) {
-	this.onaction.emit({
-		action: event.type,
-		index: this.selectedIndex,
-		time: new Date()
-	});
-  }
-
+		this.onaction.emit({
+      action: event.type,
+      index: this.selectedIndex,
+			time: new Date()
+		});
+	}
+	hoverOut(event: any) {
+    this.onaction.emit({
+      action: event.type,
+      index: this.selectedIndex,
+      time: new Date()
+    });
+	}
 
   showMore(closeButton) {
     if (!this.focused) {

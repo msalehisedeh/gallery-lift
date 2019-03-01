@@ -7,6 +7,8 @@ export declare class GalleryLiftComponent implements OnChanges {
     focused: boolean;
     onselect: EventEmitter<{}>;
     onaction: EventEmitter<{}>;
+    liftOnZero: boolean;
+    showRemainingCount: boolean;
     gallery: any[];
     template: any;
     layout: string;
@@ -18,6 +20,7 @@ export declare class GalleryLiftComponent implements OnChanges {
     next(): void;
     videoEvent(event: any): void;
     hoverOver(event: any): void;
+    hoverOut(event: any): void;
     showMore(closeButton: any): boolean;
     keyup(event: any): void;
 }
