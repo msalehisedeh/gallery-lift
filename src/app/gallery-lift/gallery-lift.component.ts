@@ -24,22 +24,47 @@ export class GalleryLiftComponent implements OnChanges {
 
   @Input() liftOnZero = false;
   @Input() showRemainingCount = false;
+  @Input() showTitleOnHover = false;
+  @Input() showMessageOnHover = true;
   @Input() gallery: any[];
   @Input() template: any;
+  @Input() maxHeight = 400;
+  @Input() hoverMessage = 'See more...';
   @Input() layout = 'large-on-single';
   
   ngOnChanges(changes: any) {
     if (changes.layout) {
-      switch(this.layout){
-        case 'large-on-single': this.displayType = 'c1';this.layList = [1];break;
-        case 'split-on-dual': this.displayType = 'c2';this.layList = [1,2];break;
-        case 'large-on-right': this.displayType = 'c3';this.layList = [1,2,3];break;
-        case 'split-on-quadruple': this.displayType = 'c4';this.layList = [1,2,3,4];break;
-        case 'large-on-middle': this.displayType = 'c5';this.layList = [1,2,3,4,5];break;
-        case 'large-on-left': this.displayType = 'rc3';this.layList = [1,2,3];break;
-        case 'large-on-sides': this.displayType = 'rc4';this.layList = [1,2,3,4];break;
+      switch(this.layout) {
+        case 'large-on-single': this.displayType = 'c1';this.layList = [1]; break;
+        case 'split-on-dual': this.displayType = 'c2';this.layList = [1,2]; break;
+        case 'large-on-right': this.displayType = 'c3';this.layList = [1,2,3]; break;
+        case 'split-on-quadruple': this.displayType = 'c4';this.layList = [1,2,3,4]; break;
+        case 'large-on-middle': this.displayType = 'c5';this.layList = [1,2,3,4,5]; break;
+        case 'large-on-left': this.displayType = 'rc3';this.layList = [1,2,3]; break;
+        case 'large-on-sides': this.displayType = 'rc4';this.layList = [1,2,3,4]; break;
       }
     }
+  }
+  maxHeightOf(index: number) {
+    let max = this.maxHeight;
+    switch(this.layout) {
+      case 'large-on-single': break;
+      case 'split-on-dual': break;
+      case 'large-on-right': 
+        max = index < 2 ? (this.maxHeight / 2): max;
+        break;
+      case 'split-on-quadruple': max = this.maxHeight / 2; break;
+      case 'large-on-middle':
+        max = index === 2 ? max : (this.maxHeight / 2);
+        break;
+      case 'large-on-left': 
+        max = index === 0 ? max : (this.maxHeight / 2);
+        break;
+      case 'large-on-sides': 
+        max = (index === 0 || index === 3) ? max : (this.maxHeight / 2);
+        break;
+    }
+    return max + 'px';
   }
   liftUpImagery(index: number) {
     this.selectedIndex = this.liftOnZero ? 0 : index;

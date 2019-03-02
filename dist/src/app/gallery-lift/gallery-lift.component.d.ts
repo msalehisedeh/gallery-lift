@@ -9,10 +9,15 @@ export declare class GalleryLiftComponent implements OnChanges {
     onaction: EventEmitter<{}>;
     liftOnZero: boolean;
     showRemainingCount: boolean;
+    showTitleOnHover: boolean;
+    showMessageOnHover: boolean;
     gallery: any[];
     template: any;
+    maxHeight: number;
+    hoverMessage: string;
     layout: string;
     ngOnChanges(changes: any): void;
+    maxHeightOf(index: number): string;
     liftUpImagery(index: number): void;
     liftDownImagery(): void;
     fullScreen(): void;

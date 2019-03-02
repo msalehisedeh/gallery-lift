@@ -20,19 +20,40 @@
     <label for="large-on-sides"><input id="large-on-sides" name="viewOption" type="radio" [checked]="viewOption === 'large-on-sides'" (click)="viewOption = 'large-on-sides'" />large-on-sides</label>
   </fieldset>
   <fieldset>
-    <legend>Lift policy</legend>
-    <label for="liftOnZero">
-      <input id="liftOnZero" name="liftOnZero" type="checkbox" [checked]="liftOnZero === true" (change)="liftOnZero = !liftOnZero" />
-      Lift On Zero
+    <legend>Preview policy</legend>
+    <label for="hoverMessage">Hover Message: 
+      <input id="hoverMessage" name="hoverMessage" [value]="hoverMessage" (keyup)="hoverMessage = $event.target.value" />
+    </label>
+    <label for="maxHeight">Max Height: 
+      <input id="maxHeight" name="maxHeight" [value]="maxHeight" (keyup)="maxHeight = $event.target.value" />
+    </label>
+    <label for="showTitleOnHover">
+      <input id="showTitleOnHover" name="showTitleOnHover" type="checkbox" [checked]="showTitleOnHover === true" (change)="showTitleOnHover = !showTitleOnHover" />
+      Show Title On Hover
+    </label>
+    <label for="showMessageOnHover">
+      <input id="showMessageOnHover" name="showMessageOnHover" type="checkbox" [checked]="showMessageOnHover === true" (change)="showMessageOnHover = !showMessageOnHover" />
+      Show Hover Message
     </label>
     <label for="showRemainingCount">
       <input id="showRemainingCount" name="showRemainingCount" type="checkbox" [checked]="showRemainingCount === true" (change)="showRemainingCount = !showRemainingCount" />
       Show Remaining Count
     </label>
   </fieldset>
+  <fieldset>
+    <legend>Lift policy</legend>
+    <label for="liftOnZero">
+      <input id="liftOnZero" name="liftOnZero" type="checkbox" [checked]="liftOnZero === true" (change)="liftOnZero = !liftOnZero" />
+      Lift On Zero
+    </label>
+  </fieldset>
 </div>
   
 <gallery-lift
+  [hoverMessage]="hoverMessage"
+  [showMessageOnHover]="showMessageOnHover"
+  [maxHeight]="maxHeight"
+  [showTitleOnHover]="showTitleOnHover"
   [layout]="viewOption"
   [liftOnZero]="liftOnZero"
   [showRemainingCount]="showRemainingCount"

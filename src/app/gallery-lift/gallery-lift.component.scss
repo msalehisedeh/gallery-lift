@@ -1,7 +1,7 @@
 :host {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  display: table;
+  display: flex;
   padding: 0;
   margin: 5px;
   .off-screen {
@@ -71,6 +71,10 @@
         top: 5px;
         width: 33px;
       }
+      .next {
+        top: 50%;
+        width: 22px;
+      }
       .fa-expand {
         position: absolute;
         right: 0;
@@ -83,6 +87,7 @@
         cursor: pointer;
         text-align: center;
         width: 100%;
+        position: absolute;
         &:hover {
           color: #ccc;
         }
@@ -103,11 +108,13 @@
     grid-gap: 0;
     background-color: #000;
     padding: 0;
-    div {
+    .view {
       text-align: center;
       padding: 0;
       position: relative;
       box-sizing: border-box;
+      display: flex;
+      overflow: hidden;
       img, video {
         object-fit: cover;
       }
@@ -119,19 +126,31 @@
         -o-filter: brightness(70%);
         -ms-filter: brightness(70%);
         filter: brightness(70%);
-        .more {
+        .more, .title {
           display: inline;
         }
       }
       .counter {
         width: 100%;
         height: 100%;
-        background-color: rgba(100,100,100,0.8);
+        background-color: rgba(100,100,100,0.5);
         color: #fff;
         position: absolute;
         top: 0;
-        font-size: 4rem;
-        padding: 25% 0;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+      .title {
+        display: none;
+        width: 100%;
+        background-color: black;
+        color: white;
+        font-size: 1rem;
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 5px;
+        overflow: hidden;
       }
       .more {
         display: none;
@@ -152,40 +171,68 @@
     }
     &.c1 {
       grid-template-areas: 'tl';
+      .counter {
+        font-size: 4rem;
+        padding: 25% 0;
+      }
     }
     &.c2 {
       grid-template-columns: 50% 50%;
       grid-template-areas: 'tl bl';
+      .counter {
+        font-size: 4rem;
+        padding: 25% 0;
+      }
     }
     &.c3 {
       grid-template-columns: 32% auto;
       grid-template-areas: 
         'tl center center'
         'bl center center';
-    }
+        .counter {
+          font-size: 4rem;
+          padding: 25% 0;
+        }
+      }
     &.c4 {
       grid-template-columns: 50% 50%;
       grid-template-areas:
       'tl center'
       'bl tr';
+      .counter {
+        font-size: 4rem;
+        padding: 25% 0;
+      }
     }
     &.c5 {
       grid-template-columns: 25% auto 25%;
       grid-template-areas:
       'tl center center tr'
       'bl center center br';
+      .counter {
+        font-size: 2.5rem;
+        padding: 25% 0;
+      }
     }
     &.rc3 {
       grid-template-columns: auto 30%;
       grid-template-areas:
       'tl tl bl'
       'tl tl center';
+      .counter {
+        font-size: 2.5rem;
+        padding: 40% 0;
+      }
     }
     &.rc4 {
       grid-template-columns: 30% auto 30%;
       grid-template-areas:
        'tl bl tr'
        'tl center tr';
+       .counter {
+        font-size: 2.5rem;
+        padding: 80% 0;
+      }
     }
   }
   @media only screen and (max-width: 600px) {

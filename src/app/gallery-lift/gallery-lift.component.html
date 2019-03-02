@@ -4,6 +4,7 @@
         (keyup)="keyup($event)"
         (click)="liftUpImagery(i)"
         class="view"
+        [style.max-height]='maxHeightOf(i)'
         [attr.tabindex]="liftup ? -1: 0">
         <span class="off-screen">
             <ng-container 
@@ -11,10 +12,11 @@
                 [ngTemplateOutlet]="template" 
                 [ngTemplateOutletContext]="{data: gallery[i].data, selected: i+1, total: gallery.length}"></ng-container>
         </span>
+        <div *ngIf="showTitleOnHover" class="title">{{gallery[i].data.title}}</div>
         <img *ngIf="gallery[i].type === 'image'" aria-hidden="true" width="100%" height="100%" [src]="gallery[i].src" />
         <video *ngIf="gallery[i].type === 'video'" width="100%" [attr.src]="gallery[i].src" disabled></video>
         <div *ngIf="showRemainingCount && i === (layList.length - 1)" class="counter">+ {{gallery.length - i - 1}}</div>
-        <div class="more">See more...</div>
+        <div *ngIf="showMessageOnHover" class="more">{{hoverMessage}}</div>
     </div>
 </div>
 <div class="lift" *ngIf="liftup">
@@ -50,7 +52,7 @@
         <a tabindex="0" class="close fa fa-close" title="Close viewer" #closeButton
             (click)="liftDownImagery()" 
             (keyup)="keyup($event)"></a>
-        <!-- a (click)="fullScreen()" class="fa fa-expand"></a -->
+        <a (click)="fullScreen()" class="fa fa-expand"></a>
         <a *ngIf="showMore(closeButton)" title="View next"
             class="next fa fa-chevron-right" tabindex="0" 
             (keyup)="keyup($event)"

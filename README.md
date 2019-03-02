@@ -15,13 +15,23 @@ DEPENDENCIES:
 
 ```javascript
 <gallery-lift
-  layout="large-on-sides"
-  [liftOnZero]="true"
-  [showRemainingCount]="true"
+  [hoverMessage]="hoverMessage"
+  [showMessageOnHover]="showMessageOnHover"
+  [maxHeight]="maxHeight"
+  [showTitleOnHover]="showTitleOnHover"
+  [layout]="viewOption"
+  [liftOnZero]="liftOnZero"
+  [showRemainingCount]="showRemainingCount"
   [template]="myTeplate"
   [gallery]="myGallery"
+  (onaction)="onaction($event)"
   (onselect)="onselect($event)"></gallery-lift>
 
+<ng-template #myTeplate let-detail="data" let-current="selected" let-total="total">
+    <span>{{current}} of {{total}}</span>
+    <h3>{{detail.title}}</h3>
+    <p>{{detail.description}}</p>
+</ng-template>
 ```
 
 ## Attributes
@@ -32,6 +42,10 @@ DEPENDENCIES:
 |gallery          | List of items to be in the display gallery.                                           |
 |liftOnZero       | Start from zero index when lifting the gallery or from te index of clicked on entry.  |
 |showRemainingCount| Show the remaining number of entries on last item of preview pane.                   |
+|showTitleOnHover | Show the entry title on hover over preview pane.                                      |
+|showMessageOnHover| Show the view more message on hover over preview pane.                               |
+|hoverMessage     | set the view more message to be displayed on hover over preview pane.                 |
+|maxHeight        | set the maximum height of the preview pane. Default is 400 pixels.                    |
 |layout           | How to display items in the preview pane. options are 'large-on-single', 'split-on-dual', 'large-on-right', 'split-on-quadruple', 'large-on-middle', 'large-on-left', 'large-on-sides'           |
 
 ## Layouts
@@ -97,6 +111,8 @@ You can register to receive the following events:
 
 | Version | Description                                                                                   |
 |---------|-----------------------------------------------------------------------------------------------|
+| 1.0.4   | Added more attributes to allow you more control over is component.                            |
+| 1.0.3   | Updated the READ ME file.                                                                     |
 | 1.0.2   | Fixed a few CSS issues. Added liftOnZero attribute to enforce lift policy and showRemainingCount attribute to show remaining number of entries in the list. |
 | 1.0.1   | Removed unused attribute. Added event handling on mouse over and play video.                  |
 | 1.0.0   | Initial release.                                                                              |

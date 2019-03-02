@@ -8,9 +8,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'gallery lift';
   events: string[] = [];
+  maxHeight = '400';
   viewOption = 'large-on-right';
+  hoverMessage='View Gallery...';
   liftOnZero = true;
+  showMessageOnHover = true;
   showRemainingCount = true;
+  showTitleOnHover = true;
 
   myGallery= [{
     data: {
