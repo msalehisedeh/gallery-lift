@@ -71,6 +71,18 @@ You can register to receive the following events:
 |onselect     | published when a preview entry selected  `{action, index}`                                |
 |onaction     | published when a selected entry viewed or action performed on it `{action, index, date}`  |
 
+## Data Entry Interface
+
+```javascript
+{
+  data?: {        // content describing the imagery
+    title?: string,
+    description: string
+  },
+  type?: string,  // if undefined, defaults to image
+  src: string     // url of image or video
+}
+```
 ## Sample data
 
 ```javascript
@@ -113,6 +125,7 @@ You can register to receive the following events:
 
 | Version | Description                                                                                   |
 |---------|-----------------------------------------------------------------------------------------------|
+| 1.0.6   | Realized it is possible to have imagery only without title and description (undefined data) in an entry. Made necessary adjustment to assume data could be undefined. Also assuming possibility of type being undefined which by default will assume src attribute referencing an image URL. |
 | 1.0.5   | Accidentally put the full-screen option on the lift and forgot to put code behind it. Added the code and some new ideas lead to adding sideBySide attribute. |
 | 1.0.4   | Added more attributes to allow you more control over is component.                            |
 | 1.0.3   | Updated the READ ME file.                                                                     |
