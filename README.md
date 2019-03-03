@@ -16,6 +16,7 @@ DEPENDENCIES:
 ```javascript
 <gallery-lift
   [hoverMessage]="hoverMessage"
+  [sideBySide]="true"
   [showMessageOnHover]="showMessageOnHover"
   [maxHeight]="maxHeight"
   [showTitleOnHover]="showTitleOnHover"
@@ -40,7 +41,8 @@ DEPENDENCIES:
 |-----------------|---------------------------------------------------------------------------------------|
 |template         | template to be used to display detail information about an item.                      |
 |gallery          | List of items to be in the display gallery.                                           |
-|liftOnZero       | Start from zero index when lifting the gallery or from te index of clicked on entry.  |
+|liftOnZero       | Start from zero index when lifting the gallery or from the index of entry which is selected. |
+|sideBySide       | Arrange the entry and content side by side or vertical.                               |
 |showRemainingCount| Show the remaining number of entries on last item of preview pane.                   |
 |showTitleOnHover | Show the entry title on hover over preview pane.                                      |
 |showMessageOnHover| Show the view more message on hover over preview pane.                               |
@@ -111,6 +113,7 @@ You can register to receive the following events:
 
 | Version | Description                                                                                   |
 |---------|-----------------------------------------------------------------------------------------------|
+| 1.0.5   | Accidentally put the full-screen option on the lift and forgot to put code behind it. Added the code and some new ideas lead to adding sideBySide attribute. |
 | 1.0.4   | Added more attributes to allow you more control over is component.                            |
 | 1.0.3   | Updated the READ ME file.                                                                     |
 | 1.0.2   | Fixed a few CSS issues. Added liftOnZero attribute to enforce lift policy and showRemainingCount attribute to show remaining number of entries in the list. |

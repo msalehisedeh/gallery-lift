@@ -5,8 +5,10 @@ export declare class GalleryLiftComponent implements OnChanges {
     selectedIndex: number;
     liftup: boolean;
     focused: boolean;
+    expanded: boolean;
     onselect: EventEmitter<{}>;
     onaction: EventEmitter<{}>;
+    sideBySide: boolean;
     liftOnZero: boolean;
     showRemainingCount: boolean;
     showTitleOnHover: boolean;
@@ -16,6 +18,7 @@ export declare class GalleryLiftComponent implements OnChanges {
     maxHeight: number;
     hoverMessage: string;
     layout: string;
+    constructor();
     ngOnChanges(changes: any): void;
     maxHeightOf(index: number): string;
     liftUpImagery(index: number): void;

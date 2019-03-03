@@ -15,6 +15,7 @@ export class AppComponent {
   showMessageOnHover = true;
   showRemainingCount = true;
   showTitleOnHover = true;
+  sideBySide = true;
 
   myGallery= [{
     data: {

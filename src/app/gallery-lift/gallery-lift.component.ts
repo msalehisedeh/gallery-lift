@@ -18,10 +18,12 @@ export class GalleryLiftComponent implements OnChanges {
   selectedIndex = 0;
   liftup = false;
   focused = false;
+  expanded = false;
   
   @Output() onselect= new EventEmitter()
   @Output() onaction= new EventEmitter()
 
+  @Input() sideBySide = true;
   @Input() liftOnZero = false;
   @Input() showRemainingCount = false;
   @Input() showTitleOnHover = false;
@@ -32,6 +34,31 @@ export class GalleryLiftComponent implements OnChanges {
   @Input() hoverMessage = 'See more...';
   @Input() layout = 'large-on-single';
   
+  constructor() {
+    if (navigator.platform.toUpperCase().indexOf('MAC')<0) {
+      document.addEventListener("webkitfullscreenchange", (event: Event) => {
+        if(!window.screenTop && !window.screenY) {
+          this.fullScreen();
+        }
+      });
+      document.addEventListener("mozfullscreenchange", (event: Event) => {
+        const win: any = window;
+        const isFullScreen = win.fullScreen ||
+                            (win.innerWidth == screen.width && win.innerHeight == screen.height)
+        if(!isFullScreen) {
+          this.fullScreen();
+        }
+      });
+      document.addEventListener("MSFullscreenChange", (event: Event) => {
+        const win: any = window;
+        const isFullScreen = win.fullScreen ||
+                            (win.innerWidth == screen.width && win.innerHeight == screen.height)
+        if(!isFullScreen) {
+          this.fullScreen();
+        }
+      });
+    }
+  }
   ngOnChanges(changes: any) {
     if (changes.layout) {
       switch(this.layout) {
@@ -75,6 +102,9 @@ export class GalleryLiftComponent implements OnChanges {
     });
   }
   liftDownImagery() {
+    if (this.expanded) {
+      this.fullScreen();
+    }
     this.liftup = false;
     this.focused = false
     this.onselect.emit({
@@ -83,7 +113,28 @@ export class GalleryLiftComponent implements OnChanges {
     });
   }
   fullScreen() {
-
+    const doc: any = document;
+    this.expanded = !this.expanded;
+    if (this.expanded) {
+      const element: any = doc.documentElement;
+      if(element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if(element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+      } else if(element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+      } else if(element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+      }
+    } else {
+      if(doc.exitFullscreen) {
+        doc.exitFullscreen();
+      } else if(doc.mozCancelFullScreen) {
+        doc.mozCancelFullScreen();
+      } else if(doc.webkitExitFullscreen) {
+        doc.webkitExitFullscreen();
+      }
+    }
   }
   previous() {
     this.selectedIndex = this.selectedIndex - 1;
