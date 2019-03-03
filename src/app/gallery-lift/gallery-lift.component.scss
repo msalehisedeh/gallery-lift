@@ -298,6 +298,9 @@
           display: none;
         }
       }
+      &.piled {
+        position: fixed !important;
+      }
     }
   }
 }
