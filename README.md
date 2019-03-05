@@ -18,6 +18,7 @@ DEPENDENCIES:
   [hoverMessage]="hoverMessage"
   [sideBySide]="true"
   [showMessageOnHover]="showMessageOnHover"
+  [magnifyImageEnabled]="magnifyImageEnabled"
   [maxHeight]="maxHeight"
   [showTitleOnHover]="showTitleOnHover"
   [layout]="viewOption"
@@ -43,6 +44,7 @@ DEPENDENCIES:
 |gallery          | List of items to be in the display gallery.                                           |
 |liftOnZero       | Start from zero index when lifting the gallery or from the index of entry which is selected. |
 |sideBySide       | Arrange the entry and content side by side or vertical.                               |
+|magnifyImageEnabled| Enable image magnification on mobile.                                               |
 |showRemainingCount| Show the remaining number of entries on last item of preview pane.                   |
 |showTitleOnHover | Show the entry title on hover over preview pane.                                      |
 |showMessageOnHover| Show the view more message on hover over preview pane.                               |
@@ -80,9 +82,14 @@ You can register to receive the following events:
     description: string
   },
   type?: string,  // if undefined, defaults to image
-  src: string     // url of image or video
+  src: string,     // url of image or video
+  poster?: string  // image url to be displayed in place of video startup image
 }
+
+// If you want the video display be handled correcly on mobile, 
+// **poster** attribute will become a **mandatory** field.
 ```
+
 ## Sample data
 
 ```javascript
@@ -108,7 +115,8 @@ You can register to receive the following events:
       description: 'Yosemite National Park is in California’s Sierra Nevada mountains. It’s famed for its giant, ancient sequoia trees, and for Tunnel View, the iconic vista of towering Bridalveil Fall and the granite cliffs of El Capitan and Half Dome. In Yosemite Village are shops, restaurants, lodging, the Yosemite Museum and the Ansel Adams Gallery, with prints of the photographer’s renowned black-and-white landscapes of the area.'
     },
     type: 'video',
-    src: "https://s3.amazonaws.com/freestock-transcoded-videos-prod/transcoded/freestock_v2680286.mp4"
+    src: "https://s3.amazonaws.com/freestock-transcoded-videos-prod/transcoded/freestock_v2680286.mp4",
+    poster: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Nevada_Fall%2C_Yosemite_NP%2C_CA%2C_US_-_Diliff.jpg/800px-Nevada_Fall%2C_Yosemite_NP%2C_CA%2C_US_-_Diliff.jpg"
   },
   {
     data: {
@@ -125,6 +133,7 @@ You can register to receive the following events:
 
 | Version | Description                                                                                   |
 |---------|-----------------------------------------------------------------------------------------------|
+| 1.0.9   | Resolved problem of displaying video startup image on mobile and added magnifyImageEnabled attribute. |
 | 1.0.8   | Tested on my IPhone and realized do not need full screen option on mobile.                    |
 | 1.0.7   | Fixed CSS for smaller screens when sideBySide attribute is set to false.                      |
 | 1.0.6   | Realized it is possible to have imagery only without title and description (undefined data) in an entry. Made necessary adjustment to assume data could be undefined. Also assuming possibility of type being undefined which by default will assume src attribute referencing an image URL. |

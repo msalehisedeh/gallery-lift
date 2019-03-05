@@ -3,6 +3,7 @@ export declare class GalleryLiftComponent implements OnChanges {
     layList: number[];
     displayType: string;
     selectedIndex: number;
+    magnified: boolean;
     liftup: boolean;
     focused: boolean;
     expanded: boolean;
@@ -13,6 +14,7 @@ export declare class GalleryLiftComponent implements OnChanges {
     showRemainingCount: boolean;
     showTitleOnHover: boolean;
     showMessageOnHover: boolean;
+    magnifyImageEnabled: boolean;
     gallery: any[];
     template: any;
     maxHeight: number;
@@ -23,10 +25,12 @@ export declare class GalleryLiftComponent implements OnChanges {
     maxHeightOf(index: number): string;
     liftUpImagery(index: number): void;
     liftDownImagery(): void;
+    magnify(liftView: any): void;
     fullScreen(): void;
     previous(): void;
     next(): void;
     videoEvent(event: any): void;
+    touchHover(event: any): void;
     hoverOver(event: any): void;
     hoverOut(event: any): void;
     showMore(closeButton: any): boolean;

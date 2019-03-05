@@ -50,12 +50,17 @@
       <input id="sideBySide" name="sideBySide" type="checkbox" [checked]="sideBySide === true" (change)="sideBySide = !sideBySide" />
       Show imagery and info side by side
     </label>
+    <label for="magnifyImageEnabled">
+      <input id="magnifyImageEnabled" name="magnifyImageEnabled" type="checkbox" [checked]="magnifyImageEnabled === true" (change)="magnifyImageEnabled = !magnifyImageEnabled" />
+      Show Magnify Image button On Mobile
+    </label>
   </fieldset>
 </div>
   
 <gallery-lift
   [sideBySide]="sideBySide"
   [hoverMessage]="hoverMessage"
+  [magnifyImageEnabled]="magnifyImageEnabled"
   [showMessageOnHover]="showMessageOnHover"
   [maxHeight]="maxHeight"
   [showTitleOnHover]="showTitleOnHover"

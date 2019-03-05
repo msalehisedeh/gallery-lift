@@ -6,6 +6,7 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
+import { storeCleanupWithContext } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'gallery-lift',
@@ -16,6 +17,7 @@ export class GalleryLiftComponent implements OnChanges {
   layList = [1];
   displayType = 'c1';
   selectedIndex = 0;
+  magnified = false;
   liftup = false;
   focused = false;
   expanded = false;
@@ -28,6 +30,7 @@ export class GalleryLiftComponent implements OnChanges {
   @Input() showRemainingCount = false;
   @Input() showTitleOnHover = false;
   @Input() showMessageOnHover = true;
+  @Input() magnifyImageEnabled = false;
   @Input() gallery: any[];
   @Input() template: any;
   @Input() maxHeight = 400;
@@ -112,6 +115,20 @@ export class GalleryLiftComponent implements OnChanges {
       action: 'lift down'
     });
   }
+  magnify(liftView: any) {
+    this.magnified = !this.magnified;
+    if (this.magnified) {
+      liftView.style.width = liftView.clientWidth + "px";
+      liftView.style.height = liftView.clientHeight + "px";
+      liftView.children[0].style.width = "300%";
+      liftView.children[0].style.height = "300%";
+    } else {
+      liftView.children[0].style.width = "100%";
+      liftView.children[0].style.height = "100%";
+      liftView.children[0].style.top = "0px";
+      liftView.children[0].style.left = "0px";
+    }
+  }
   fullScreen() {
     const doc: any = document;
     this.expanded = !this.expanded;
@@ -170,8 +187,15 @@ export class GalleryLiftComponent implements OnChanges {
       }
     });
   }
-  hoverOver(event: any) {
+  touchHover(event: any) {
 		this.onaction.emit({
+      action: event.type,
+      index: this.selectedIndex,
+			time: new Date()
+		});
+	}
+  hoverOver(event: any) {
+    this.onaction.emit({
       action: event.type,
       index: this.selectedIndex,
 			time: new Date()

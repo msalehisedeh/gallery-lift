@@ -13,7 +13,10 @@
         </span>
         <div *ngIf="showTitleOnHover && gallery[i].data && gallery[i].data.title" class="title">{{gallery[i].data.title}}</div>
         <img *ngIf="gallery[i].type === undefined || gallery[i].type === 'image'" aria-hidden="true" width="100%" height="100%" [src]="gallery[i].src" />
-        <video *ngIf="gallery[i].type === 'video'" width="100%" [attr.src]="gallery[i].src" disabled></video>
+        <video width="100%" 
+            *ngIf="gallery[i].type === 'video'"
+            [attr.poster]="gallery[i].poster ? gallery[i].poster : null"
+            [attr.src]="gallery[i].src" disabled></video>
         <div *ngIf="showRemainingCount && i === (layList.length - 1)" class="counter">
             + {{gallery.length - i - 1}}
             <span class="off-screen">more entries</span>
@@ -35,12 +38,19 @@
     <div class="lifter" 
         [class.vertical]="!sideBySide"
         [class.fullscreen]="expanded">
-        <div class="lift-view"
-            (mouseover)="hoverOver($event)">
-            <img *ngIf="gallery[selectedIndex].type === undefined || gallery[selectedIndex].type === 'image'"  aria-hidden="true" width="100%" height="100%" [src]="gallery[selectedIndex].src" />
-            <video *ngIf="gallery[selectedIndex].type === 'video'" 
+        <div class="lift-view" [class.magnified]="magnified" #liftView
+            (touchmove)="touchHover($event)"
+            (mouseover)="hoverOver($event)"><img 
+                *ngIf="gallery[selectedIndex].type === undefined || gallery[selectedIndex].type === 'image'"  
+                aria-hidden="true"
+                width="100%" 
+                height="100%" 
+                [src]="gallery[selectedIndex].src" /><video 
+
+                *ngIf="gallery[selectedIndex].type === 'video'" 
                 width="100%" 
                 [attr.src]="gallery[selectedIndex].src" 
+                [attr.poster]="gallery[selectedIndex].poster ? gallery[selectedIndex].poster : null"
                 (play)="videoEvent($event)"
                 (pause)="videoEvent($event)"
                 (ended)="videoEvent($event)"
@@ -68,6 +78,12 @@
                 [attr.title]="expanded ? 'Normal screen view' : 'Full screen view'"
                 [class.fa-expand]="!expanded" 
                 [class.fa-compress]="expanded"></a>
+            <a *ngIf="magnifyImageEnabled" class="magnify fa" tabindex="0"
+                (click)="magnify(liftView)" 
+                (keyup)="keyup($event)"
+                [attr.title]="magnified ? 'Normal Image' : 'Magnify Image'"
+                [class.fa-expand]="!magnified" 
+                [class.fa-compress]="magnified"></a>
             <a *ngIf="template && gallery[selectedIndex].data"
                 class="fa" tabindex="0"
                 (click)="sideBySide = !sideBySide" 
