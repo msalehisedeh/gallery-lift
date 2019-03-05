@@ -61,25 +61,30 @@
             title="Close viewer"
             (click)="liftDownImagery()" 
             (keyup)="keyup($event)"></a>
-        <a (click)="fullScreen()" 
-            class="fa" 
-            [attr.title]="expanded ? 'Normal screen view' : 'Full screen view'"
-            [class.fa-expand]="!expanded" 
-            [class.fa-compress]="expanded"></a>
-        <a *ngIf="template && gallery[selectedIndex].data"
-            (click)="sideBySide = !sideBySide" 
-            class="fa" 
-            [attr.title]="sideBySide ? 'Align Vertical' : 'Align Horizontal'"
-            [class.fa-columns]="!sideBySide" 
-            [class.fa-bars]="sideBySide"></a>
+        <span class="top-wrap">
+            <a class="fa" tabindex="0"
+                (click)="fullScreen()" 
+                (keyup)="keyup($event)"
+                [attr.title]="expanded ? 'Normal screen view' : 'Full screen view'"
+                [class.fa-expand]="!expanded" 
+                [class.fa-compress]="expanded"></a>
+            <a *ngIf="template && gallery[selectedIndex].data"
+                class="fa" tabindex="0"
+                (click)="sideBySide = !sideBySide" 
+                (keyup)="keyup($event)"
+                [attr.title]="sideBySide ? 'Align Vertical' : 'Align Horizontal'"
+                [class.fa-columns]="!sideBySide" 
+                [class.fa-bars]="sideBySide"></a>
+            <a [href]="gallery[selectedIndex].src" 
+                tabindex="0" title="download" 
+                class="download fa fa-download" 
+                (keyup)="keyup($event)"
+                download></a>
+        </span>
         <a *ngIf="showMore(closeButton)" 
             title="View next"
             class="next fa fa-chevron-right" tabindex="0" 
             (keyup)="keyup($event)"
             (click)="next()"></a>
-        <a [href]="gallery[selectedIndex].src"  
-            title="download" 
-            class="download fa fa-download" 
-            download></a>
     </div>
 </div>

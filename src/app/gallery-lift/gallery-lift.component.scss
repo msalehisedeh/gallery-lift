@@ -85,49 +85,48 @@
       flex-direction: column;
       padding: 20% 0;
       box-sizing: border-box;
+      position: relative;
       .close {
         position: absolute;
         right: 0;
         top: 5px;
         width: 33px;
       }
+      .top-wrap {
+        position: absolute;
+        top: 40px;
+        right: 2px;
+        .fa-expand, .fa-compress {
+          width: 33px;
+          font-size: 1.5rem;
+          margin-bottom: 8px;
+        }
+        .fa-columns, .fa-bars {
+          width: 33px;
+          font-size: 1.5rem;
+          margin-bottom: 8px;
+        }
+        .download {
+          font-size: 1.5rem;
+          width: 33px;
+          color: #fff;
+          margin-bottom: 8px;
+        }
+      }
       .next {
         top: 50%;
         width: 22px;
-      }
-      .fa-expand, .fa-compress {
         position: absolute;
-        right: 0;
-        top: 44px;
-        width: 33px;
-        font-size: 1.5rem;
-      }
-      .fa-columns, .fa-bars {
-        position: absolute;
-        right: 0;
-        top: 111px;
-        width: 33px;
-        font-size: 1.5rem;
       }
       a {
         font-size: 1.8rem;
         cursor: pointer;
         text-align: center;
         width: 100%;
-        position: absolute;
         &:hover {
           color: #ccc;
         }
       }
-      .download {
-        position: absolute;
-        right: 0;
-        top: 77px;
-        font-size: 1.5rem;
-        width: 33px;
-        color: #fff;
-      }
-
     }
     &.piled {
       position: absolute;
@@ -287,15 +286,23 @@
     .lift {
       .lifter {
         flex-direction: column;
+        .lift-view {
+          flex: unset;
+        }
         .lift-info {
           width: auto;
           margin: 20px;
+          flex: 1;
           overflow-y: auto;
         }
       }
       .right-controls {
-        .fa-columns, .fa-bars {
-          display: none;
+        .top-wrap {
+          top: 60px;
+          .fa-expand, .fa-compress,
+          .fa-columns, .fa-bars {
+            display: none;
+          }
         }
       }
       &.piled {
