@@ -30,6 +30,7 @@
       background-color: transparent;
       padding: 20% 0;
       box-sizing: border-box;
+      position: relative;
       .prev {
         top: 50%;
         width: 22px;
@@ -198,23 +199,23 @@
         width: 100%;
         background-color: black;
         color: white;
-        font-size: 1rem;
         position: absolute;
         left: 0;
         top: 0;
         padding: 5px;
         overflow: hidden;
+        z-index: 2;
       }
       .more {
         display: none;
         width: 100%;
         background-color: black;
         color: white;
-        font-size: 1.2rem;
         position: absolute;
         left: 0;
         bottom: 0;
         padding: 5px;
+        z-index: 2;
         .enlarge {
           position: absolute;
           right: 20px;
@@ -228,17 +229,15 @@
     }
     &.c1 {
       grid-template-areas: 'tl';
-      .counter {
-        font-size: 4rem;
-        padding: 25% 0;
+      .title, .more {
+        font-size: 1rem;
       }
     }
     &.c2 {
       grid-template-columns: 50% 50%;
       grid-template-areas: 'tl bl';
-      .counter {
-        font-size: 4rem;
-        padding: 25% 0;
+      .title, .more {
+        font-size: 1rem;
       }
     }
     &.c3 {
@@ -246,19 +245,17 @@
       grid-template-areas: 
         'tl center center'
         'bl center center';
-        .counter {
-          font-size: 4rem;
-          padding: 25% 0;
-        }
+      .title, .more {
+        font-size: 1rem;
       }
+    }
     &.c4 {
       grid-template-columns: 50% 50%;
       grid-template-areas:
       'tl center'
       'bl tr';
-      .counter {
-        font-size: 4rem;
-        padding: 25% 0;
+      .title, .more {
+        font-size: 1rem;
       }
     }
     &.c5 {
@@ -266,9 +263,8 @@
       grid-template-areas:
       'tl center center tr'
       'bl center center br';
-      .counter {
-        font-size: 2.5rem;
-        padding: 25% 0;
+      .title, .more {
+        font-size: 0.9rem;
       }
     }
     &.rc3 {
@@ -276,9 +272,8 @@
       grid-template-areas:
       'tl tl bl'
       'tl tl center';
-      .counter {
-        font-size: 2.5rem;
-        padding: 40% 0;
+      .title, .more {
+        font-size: 0.9rem;
       }
     }
     &.rc4 {
@@ -286,9 +281,68 @@
       grid-template-areas:
        'tl bl tr'
        'tl center tr';
-       .counter {
-        font-size: 2.5rem;
-        padding: 80% 0;
+      .title, .more {
+        font-size: 0.9rem;
+      }
+    }
+    &.rc5 {
+      grid-template-columns: 50% 50%;
+      grid-template-areas:
+       'tl tl'
+       'bl center';
+      .title, .more {
+        font-size: 0.9rem;
+      }
+    }
+    &.rc6 {
+      grid-template-columns: 33% auto 33%;
+      grid-template-areas:
+       'tl tl tl'
+       'bl center tr';
+      .title, .more {
+        font-size: 0.9rem;
+      }
+    }
+    &.rc7 {
+      grid-template-columns: 25%  25%  25%  25%;
+      grid-template-areas:
+       'tl tl tl tl'
+       'bl center tr br';
+      .title, .more {
+        font-size: 0.9rem;
+      }
+    }
+  }
+  &.mobile {
+    .lift {
+      .lifter {
+        flex-direction: column;
+        .lift-view {
+          flex: unset;
+          &.magnified {
+            overflow: auto;
+          }
+        }
+        .lift-info {
+          width: auto;
+          margin: 20px;
+          flex: 1;
+          overflow-y: auto;
+        }
+      }
+      .right-controls {
+        .top-wrap {
+          .fa-expand, .fa-compress {
+            display: none;
+            &.magnify { display: inline-block; }
+          }
+          .fa-columns, .fa-bars {
+            display: none;
+          }
+        }
+      }
+      &.piled {
+        position: fixed !important;
       }
     }
   }

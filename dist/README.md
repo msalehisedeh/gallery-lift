@@ -63,7 +63,9 @@ DEPENDENCIES:
 |large-on-middle  |One row of large entry in the middle and two rows of entries on each side of the middle entry.|
 |large-on-left    |Tow rows of small entries on right and one row of large entry on left of the pane.     |
 |large-on-sides   |One row of large entry on each sides and two rows of entries in the middle.            |
-
+|large-on-top     |One row of large entry on top and two columns of small entries on second row.          |
+|large-on-top-triple|One row of large entry on top and three columns of small entries on second row.      |
+|large-on-top-quadruple|One row of large entry on top and four columns of small entries on second row.    |
 
 ## Events
 You can register to receive the following events:
@@ -133,6 +135,8 @@ You can register to receive the following events:
 
 | Version | Description                                                                                   |
 |---------|-----------------------------------------------------------------------------------------------|
+| 1.0.11  | Added a new layout saw on Facebook.                                                           |
+| 1.0.10  | Worked on hover message font-size as well as remaining count font size and vertical position. |
 | 1.0.9   | Resolved problem of displaying video startup image on mobile and added magnifyImageEnabled attribute. |
 | 1.0.8   | Tested on my IPhone and realized do not need full screen option on mobile.                    |
 | 1.0.7   | Fixed CSS for smaller screens when sideBySide attribute is set to false.                      |

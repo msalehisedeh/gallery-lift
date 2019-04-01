@@ -1,8 +1,10 @@
-import { OnChanges, EventEmitter } from '@angular/core';
+import { OnChanges, ElementRef, ChangeDetectorRef, EventEmitter } from '@angular/core';
 export declare class GalleryLiftComponent implements OnChanges {
+    private cdr;
     layList: number[];
     displayType: string;
     selectedIndex: number;
+    host: any;
     magnified: boolean;
     liftup: boolean;
     focused: boolean;
@@ -20,13 +22,15 @@ export declare class GalleryLiftComponent implements OnChanges {
     maxHeight: number;
     hoverMessage: string;
     layout: string;
-    constructor();
+    constructor(el: ElementRef, cdr: ChangeDetectorRef);
     ngOnChanges(changes: any): void;
     maxHeightOf(index: number): string;
     liftUpImagery(index: number): void;
     liftDownImagery(): void;
     magnify(liftView: any): void;
     fullScreen(): void;
+    evalTop(): string;
+    evalFont(): string;
     previous(): void;
     next(): void;
     videoEvent(event: any): void;
@@ -35,4 +39,5 @@ export declare class GalleryLiftComponent implements OnChanges {
     hoverOut(event: any): void;
     showMore(closeButton: any): boolean;
     keyup(event: any): void;
+    private isMobile();
 }

@@ -17,7 +17,10 @@
             *ngIf="gallery[i].type === 'video'"
             [attr.poster]="gallery[i].poster ? gallery[i].poster : null"
             [attr.src]="gallery[i].src" disabled></video>
-        <div *ngIf="showRemainingCount && i === (layList.length - 1)" class="counter">
+        <div *ngIf="showRemainingCount && layList.length > 1 && i === (layList.length - 1)" 
+            class="counter" 
+            [style.font-size]="evalFont()"
+            [style.padding-top]="evalTop()">
             + {{gallery.length - i - 1}}
             <span class="off-screen">more entries</span>
         </div>

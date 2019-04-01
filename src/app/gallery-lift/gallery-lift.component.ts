@@ -4,9 +4,10 @@ import {
   OnChanges,
   Input,
   Output,
+  ElementRef,
+  ChangeDetectorRef,
   EventEmitter
 } from '@angular/core';
-import { storeCleanupWithContext } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'gallery-lift',
@@ -17,6 +18,7 @@ export class GalleryLiftComponent implements OnChanges {
   layList = [1];
   displayType = 'c1';
   selectedIndex = 0;
+  host = undefined;
   magnified = false;
   liftup = false;
   focused = false;
@@ -37,7 +39,9 @@ export class GalleryLiftComponent implements OnChanges {
   @Input() hoverMessage = 'See more...';
   @Input() layout = 'large-on-single';
   
-  constructor() {
+  constructor(el: ElementRef, private cdr: ChangeDetectorRef) {
+    this.host = el.nativeElement;
+    this.host.setAttribute("class", "mobile");
     if (navigator.platform.toUpperCase().indexOf('MAC')<0) {
       document.addEventListener("webkitfullscreenchange", (event: Event) => {
         if(!window.screenTop && !window.screenY) {
@@ -72,6 +76,18 @@ export class GalleryLiftComponent implements OnChanges {
         case 'large-on-middle': this.displayType = 'c5';this.layList = [1,2,3,4,5]; break;
         case 'large-on-left': this.displayType = 'rc3';this.layList = [1,2,3]; break;
         case 'large-on-sides': this.displayType = 'rc4';this.layList = [1,2,3,4]; break;
+        case 'large-on-top': this.displayType = 'rc5';this.layList = [1,2,3]; break;
+        case 'large-on-top-triple': this.displayType = 'rc6';this.layList = [1,2,3,4]; break;
+        case 'large-on-top-quadruple': this.displayType = 'rc7';this.layList = [1,2,3,4,5]; break;
+      }
+    }
+    if (changes.maxHeight) {
+      if (this.maxHeight < 100) {
+        this.maxHeight = 100;
+        this.cdr.detectChanges();
+      } else if (this.host.clientHeight > 100 && this.host.clientHeight < this.maxHeight) {
+        this.maxHeight = this.host.clientHeight;
+        this.cdr.detectChanges();
       }
     }
   }
@@ -80,6 +96,11 @@ export class GalleryLiftComponent implements OnChanges {
     switch(this.layout) {
       case 'large-on-single': break;
       case 'split-on-dual': break;
+      case 'large-on-top':
+      case 'large-on-top-triple':
+      case 'large-on-top-quadruple':
+        max = this.maxHeight / 2;
+        break;
       case 'large-on-right': 
         max = index < 2 ? (this.maxHeight / 2): max;
         break;
@@ -153,6 +174,47 @@ export class GalleryLiftComponent implements OnChanges {
       }
     }
   }
+  evalTop() {
+    let max = this.maxHeight;
+    switch(this.layout) {
+      case 'split-on-dual':
+      case 'large-on-single':
+      case 'large-on-right': 
+      case 'large-on-sides': 
+        max = ((max - 30)/3);
+        break;
+      case 'split-on-quadruple':
+      case 'large-on-middle':
+      case 'large-on-left': 
+      case 'large-on-top': 
+      case 'large-on-top-triple': 
+      case 'large-on-top-quadruple': 
+        max = ((max - 30)/6);
+        break;
+    }
+    return max + 'px';
+  }
+  evalFont() {
+    let max = this.maxHeight;
+    switch(this.layout) {
+      case 'split-on-dual':
+      case 'large-on-single':
+      case 'large-on-right': 
+      case 'large-on-sides': 
+        max = (max/50);
+        break;
+      case 'split-on-quadruple':
+      case 'large-on-middle':
+      case 'large-on-left': 
+      case 'large-on-top': 
+      case 'large-on-top-triple': 
+      case 'large-on-top-quadruple': 
+        max = (max/100);
+        break;
+    }
+    max = max > 6 ? 6 : max;
+    return max + 'rem';
+  }
   previous() {
     this.selectedIndex = this.selectedIndex - 1;
     this.onaction.emit({
@@ -221,5 +283,8 @@ export class GalleryLiftComponent implements OnChanges {
 		if (code === 13) {
       event.target.click();
     }
+  }
+  private isMobile() {
+    return false;
   }
 }

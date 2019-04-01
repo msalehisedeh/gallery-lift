@@ -20,11 +20,11 @@ export class AppComponent {
 
   myGallery= [{
     data: {
-      title: "Tydings Park",
-      description: 'Tydings Memorial Park is the perfect location for outdoor fun, ranging from a picnic to a day relaxing on the bay.  Located on Commerce Street, Tydings Park features 22 acres overlooking the water.'
+      title: "Kemeri National Park",
+      description: 'Kemeri National Park is special for its great biological diversity, the unique Kemeri Bog, mineral waters and therapeutic mud found here.'
     },
     type: 'image',
-    src: "https://havredegracemd.gov/wp-content/uploads/2014/05/Tydings-Park-Havre-de-Grace-Maryland.jpg"
+    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_DHFbEv_WWrVwS_-eEj8Yhxdfl5UB_bxWnKICJO-oXS9sOnuV"
   },
   {
     data: {
