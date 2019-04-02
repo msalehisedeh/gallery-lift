@@ -14,14 +14,13 @@
                 [ngTemplateOutletContext]="{data: gallery[i].data, selected: i+1, total: gallery.length}"></ng-container>
         </span>
         <div *ngIf="showTitleOnHover && gallery[i].data && gallery[i].data.title" class="title">{{gallery[i].data.title}}</div>
-        <img *ngIf="gallery[i].type === undefined || gallery[i].type === 'image'" aria-hidden="true" width="100%" height="100%" [src]="gallery[i].src" />
+        <img *ngIf="gallery[i].type === undefined || gallery[i].type === 'image'" aria-hidden="true" width="100%"  [src]="gallery[i].src" />
         <video width="100%" 
             *ngIf="gallery[i].type === 'video'"
             [attr.poster]="gallery[i].poster ? gallery[i].poster : null"
             [attr.src]="gallery[i].src" disabled></video>
-        <div *ngIf="showRemainingCount && layList.length > 1 && i === (layList.length - 1)" 
-            class="counter" 
-            [style.font-size]="evalFont()"
+        <div *ngIf="showRemainingCount  && i === (layList.length - 1)" 
+            class="counter"
             [style.padding-top]="evalTop()">
             + {{gallery.length - i - 1}}
             <span class="off-screen">more entries</span>

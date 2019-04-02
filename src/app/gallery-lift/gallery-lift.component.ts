@@ -249,13 +249,13 @@ export class GalleryLiftComponent implements OnChanges {
     switch(this.displayType) {
       case 'mc1': // layered-on-middle
       case 'mc2': // layered-on-corners
-        max = 0;
+        max = (max / 6) - 15;
         break;
       case 'c2': // split-on-dual
       case 'c1': // large-on-single
       case 'c3': // split-on-right
       case 'rc4': // large-on-sides
-        max = ((max - 30)/3);
+        max = (max / 2) - 15;
         break;
       case 'c4': // split-on-quadruple
       case 'c5': // large-on-middle
@@ -263,35 +263,10 @@ export class GalleryLiftComponent implements OnChanges {
       case 'rc5': // large-on-top
       case 'rc6':  // large-on-top-triple
       case 'rc7':  // large-on-top-quadruple
-        max = ((max - 30)/6);
-        break;
+        max = (max / 4) - 15;
+      break;
     }
     return max + 'px';
-  }
-  evalFont() {
-    let max = this.maxHeight;
-    switch(this.displayType) {
-      case 'mc1': // layered-on-middle
-      case 'mc2': // layered-on-corners
-        max = max / 60;
-        break;
-      case 'c2': // split-on-dual
-      case 'c1': // large-on-single
-      case 'c3': // split-on-right
-      case 'rc4': // large-on-sides
-        max = (max/50);
-        break;
-      case 'c4': // split-on-quadruple
-      case 'c5': // large-on-middle
-      case 'rc3': // large-on-left
-      case 'rc5': // large-on-top
-      case 'rc6': // large-on-top-triple
-      case 'rc7': // large-on-top-quadruple
-        max = (max/100);
-        break;
-    }
-    max = max > 6 ? 6 : max;
-    return max + 'rem';
   }
   previous() {
     this.selectedIndex = this.selectedIndex - 1;

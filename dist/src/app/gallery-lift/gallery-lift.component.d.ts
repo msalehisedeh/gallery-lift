@@ -34,7 +34,6 @@ export declare class GalleryLiftComponent implements OnChanges {
     magnify(liftView: any): void;
     fullScreen(): void;
     evalTop(): string;
-    evalFont(): string;
     previous(): void;
     next(): void;
     videoEvent(event: any): void;

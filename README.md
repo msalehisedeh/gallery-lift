@@ -140,6 +140,7 @@ You can register to receive the following events:
 
 | Version | Description                                                                                   |
 |---------|-----------------------------------------------------------------------------------------------|
+| 1.0.13  | Fixed the position of "+ remaining counter" on the last entry.                                |
 | 1.0.12  | Added more layouts and a new random layout option to add spice into the display area!!        |
 | 1.0.11  | Added a new layout saw on Facebook.                                                           |
 | 1.0.10  | Worked on hover message font-size as well as remaining count font size and vertical position. |

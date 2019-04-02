@@ -10,7 +10,7 @@ export class AppComponent {
   events: string[] = [];
   maxHeight = '400';
   viewOption = 'large-on-right';
-  hoverMessage='View Gallery...';
+  hoverMessage='View Details...';
   liftOnZero = true;
   border = '1px solid white';
   showMessageOnHover = true;
