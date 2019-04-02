@@ -6,7 +6,8 @@ import {
   Output,
   ElementRef,
   ChangeDetectorRef,
-  EventEmitter
+  EventEmitter,
+  MissingTranslationStrategy
 } from '@angular/core';
 
 @Component({
@@ -35,6 +36,7 @@ export class GalleryLiftComponent implements OnChanges {
   @Input() magnifyImageEnabled = false;
   @Input() gallery: any[];
   @Input() template: any;
+  @Input() borderOnView = null;
   @Input() maxHeight = 400;
   @Input() hoverMessage = 'See more...';
   @Input() layout = 'large-on-single';
@@ -67,7 +69,9 @@ export class GalleryLiftComponent implements OnChanges {
     }
   }
   ngOnChanges(changes: any) {
-    if (changes.layout) {
+    if (changes.gallery && this.layout === 'random') {
+      this.pickRandomLayout();
+    } else if (changes.layout) {
       switch(this.layout) {
         case 'large-on-single': this.displayType = 'c1';this.layList = [1]; break;
         case 'split-on-dual': this.displayType = 'c2';this.layList = [1,2]; break;
@@ -79,9 +83,15 @@ export class GalleryLiftComponent implements OnChanges {
         case 'large-on-top': this.displayType = 'rc5';this.layList = [1,2,3]; break;
         case 'large-on-top-triple': this.displayType = 'rc6';this.layList = [1,2,3,4]; break;
         case 'large-on-top-quadruple': this.displayType = 'rc7';this.layList = [1,2,3,4,5]; break;
+        case 'layered-on-middle': this.displayType = 'mc1';this.layList = [1,2,3,4]; break;
+        case 'layered-on-corners': this.displayType = 'mc2';this.layList = [1,2,3,4,5]; break;
+        case 'random': 
+          if (this.gallery) {
+            this.pickRandomLayout();
+          }
+          break;
       }
-    }
-    if (changes.maxHeight) {
+    } else if (changes.maxHeight) {
       if (this.maxHeight < 100) {
         this.maxHeight = 100;
         this.cdr.detectChanges();
@@ -91,27 +101,87 @@ export class GalleryLiftComponent implements OnChanges {
       }
     }
   }
+  private range(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  private pickRandomLayout() {
+    if (this.gallery.length === 1) {
+      this.displayType = 'c1';this.layList = [1];
+    } else if (this.gallery.length === 2) {
+      switch(this.range(1,2)) {
+        case 1: this.displayType = 'c1';this.layList = [1];break;
+        case 2: this.displayType = 'c2';this.layList = [1, 2];break;
+      }
+    } else if (this.gallery.length === 3) {
+      switch(this.range(1,5)) {
+        case 1: this.displayType = 'c1';this.layList = [1];break;
+        case 2: this.displayType = 'c2';this.layList = [1, 2];break;
+        case 3: this.displayType = 'c3';this.layList = [1, 2, 3];break;
+        case 4: this.displayType = 'rc3';this.layList = [1, 2, 3];break;
+        case 5: this.displayType = 'rc5';this.layList = [1, 2, 3];break;
+      }
+    } else if (this.gallery.length === 4) {
+      switch(this.range(1,9)) {
+        case 1: this.displayType = 'c1';this.layList = [1];break;
+        case 2: this.displayType = 'c2';this.layList = [1, 2];break;
+        case 3: this.displayType = 'c3';this.layList = [1, 2, 3];break;
+        case 4: this.displayType = 'rc3';this.layList = [1, 2, 3];break;
+        case 5: this.displayType = 'rc5';this.layList = [1, 2, 3];break;
+        case 6: this.displayType = 'c4';this.layList = [1, 2, 3, 4];break;
+        case 7: this.displayType = 'rc4';this.layList = [1, 2, 3, 4];break;
+        case 8: this.displayType = 'rc6';this.layList = [1, 2, 3, 4];break;
+        case 9: this.displayType = 'mc1';this.layList = [1, 2, 3, 4];break;
+      }
+    } else if (this.gallery.length >= 5) {
+      switch(this.range(1,12)) {
+        case 1: this.displayType = 'c1';this.layList = [1];break;
+        case 2: this.displayType = 'c2';this.layList = [1, 2];break;
+        case 3: this.displayType = 'c3';this.layList = [1, 2, 3];break;
+        case 4: this.displayType = 'rc3';this.layList = [1, 2, 3];break;
+        case 5: this.displayType = 'rc5';this.layList = [1, 2, 3];break;
+        case 6: this.displayType = 'c4';this.layList = [1, 2, 3, 4];break;
+        case 7: this.displayType = 'rc4';this.layList = [1, 2, 3, 4];break;
+        case 8: this.displayType = 'rc6';this.layList = [1, 2, 3, 4];break;
+        case 9: this.displayType = 'mc1';this.layList = [1, 2, 3, 4];break;
+        case 10: this.displayType = 'c5';this.layList = [1, 2, 3, 4, 5];break;
+        case 11: this.displayType = 'rc7';this.layList = [1, 2, 3, 4, 5];break;
+        case 12: this.displayType = 'mc2';this.layList = [1, 2, 3, 4, 5];break;
+      }
+    }
+  }
+  minHeightOf(index: number) {
+    let min = null;
+    switch(this.displayType) {
+      case 'c1':  min = this.maxHeight; break; // large-on-single
+    }
+    return min  ? min + 'px' : null;
+  }
   maxHeightOf(index: number) {
     let max = this.maxHeight;
-    switch(this.layout) {
-      case 'large-on-single': break;
-      case 'split-on-dual': break;
-      case 'large-on-top':
-      case 'large-on-top-triple':
-      case 'large-on-top-quadruple':
+    switch(this.displayType) {
+      case 'mc1': // layered-on-middle
+      case 'mc2': // layered-on-corners
+        max = this.maxHeight / 3;
+        break;
+      case 'rc5': // large-on-top
+      case 'rc6': // large-on-top-triple
+      case 'rc7': // large-on-top-quadruple
         max = this.maxHeight / 2;
         break;
-      case 'large-on-right': 
+      case 'c1': break; // large-on-single
+      case 'c2': break; // split-on-dual
+      case 'c3': // split-on-right
         max = index < 2 ? (this.maxHeight / 2): max;
         break;
-      case 'split-on-quadruple': max = this.maxHeight / 2; break;
-      case 'large-on-middle':
+      case 'c4': // split-on-quadruple
+        max = this.maxHeight / 2; break; 
+      case 'c5': // large-on-middle
         max = index === 2 ? max : (this.maxHeight / 2);
         break;
-      case 'large-on-left': 
+      case 'rc3': // large-on-left
         max = index === 0 ? max : (this.maxHeight / 2);
         break;
-      case 'large-on-sides': 
+      case 'rc4': // large-on-sides
         max = (index === 0 || index === 3) ? max : (this.maxHeight / 2);
         break;
     }
@@ -176,19 +246,23 @@ export class GalleryLiftComponent implements OnChanges {
   }
   evalTop() {
     let max = this.maxHeight;
-    switch(this.layout) {
-      case 'split-on-dual':
-      case 'large-on-single':
-      case 'large-on-right': 
-      case 'large-on-sides': 
+    switch(this.displayType) {
+      case 'mc1': // layered-on-middle
+      case 'mc2': // layered-on-corners
+        max = 0;
+        break;
+      case 'c2': // split-on-dual
+      case 'c1': // large-on-single
+      case 'c3': // split-on-right
+      case 'rc4': // large-on-sides
         max = ((max - 30)/3);
         break;
-      case 'split-on-quadruple':
-      case 'large-on-middle':
-      case 'large-on-left': 
-      case 'large-on-top': 
-      case 'large-on-top-triple': 
-      case 'large-on-top-quadruple': 
+      case 'c4': // split-on-quadruple
+      case 'c5': // large-on-middle
+      case 'rc3': // large-on-left
+      case 'rc5': // large-on-top
+      case 'rc6':  // large-on-top-triple
+      case 'rc7':  // large-on-top-quadruple
         max = ((max - 30)/6);
         break;
     }
@@ -196,19 +270,23 @@ export class GalleryLiftComponent implements OnChanges {
   }
   evalFont() {
     let max = this.maxHeight;
-    switch(this.layout) {
-      case 'split-on-dual':
-      case 'large-on-single':
-      case 'large-on-right': 
-      case 'large-on-sides': 
+    switch(this.displayType) {
+      case 'mc1': // layered-on-middle
+      case 'mc2': // layered-on-corners
+        max = max / 60;
+        break;
+      case 'c2': // split-on-dual
+      case 'c1': // large-on-single
+      case 'c3': // split-on-right
+      case 'rc4': // large-on-sides
         max = (max/50);
         break;
-      case 'split-on-quadruple':
-      case 'large-on-middle':
-      case 'large-on-left': 
-      case 'large-on-top': 
-      case 'large-on-top-triple': 
-      case 'large-on-top-quadruple': 
+      case 'c4': // split-on-quadruple
+      case 'c5': // large-on-middle
+      case 'rc3': // large-on-left
+      case 'rc5': // large-on-top
+      case 'rc6': // large-on-top-triple
+      case 'rc7': // large-on-top-quadruple
         max = (max/100);
         break;
     }

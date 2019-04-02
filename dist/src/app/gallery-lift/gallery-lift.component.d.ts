@@ -19,11 +19,15 @@ export declare class GalleryLiftComponent implements OnChanges {
     magnifyImageEnabled: boolean;
     gallery: any[];
     template: any;
+    borderOnView: any;
     maxHeight: number;
     hoverMessage: string;
     layout: string;
     constructor(el: ElementRef, cdr: ChangeDetectorRef);
     ngOnChanges(changes: any): void;
+    private range(min, max);
+    private pickRandomLayout();
+    minHeightOf(index: number): string;
     maxHeightOf(index: number): string;
     liftUpImagery(index: number): void;
     liftDownImagery(): void;

@@ -22,6 +22,7 @@ DEPENDENCIES:
   [maxHeight]="maxHeight"
   [showTitleOnHover]="showTitleOnHover"
   [layout]="viewOption"
+  [borderOnView]="1px solid white"
   [liftOnZero]="liftOnZero"
   [showRemainingCount]="showRemainingCount"
   [template]="myTeplate"
@@ -50,6 +51,7 @@ DEPENDENCIES:
 |showMessageOnHover| Show the view more message on hover over preview pane.                               |
 |hoverMessage     | set the view more message to be displayed on hover over preview pane.                 |
 |maxHeight        | set the maximum height of the preview pane. Default is 400 pixels.                    |
+|borderOnView     | Specify border separation around each view. Default is null.                          |
 |layout           | How to display items in the preview pane. options are 'large-on-single', 'split-on-dual', 'large-on-right', 'split-on-quadruple', 'large-on-middle', 'large-on-left', 'large-on-sides'           |
 
 ## Layouts
@@ -66,6 +68,9 @@ DEPENDENCIES:
 |large-on-top     |One row of large entry on top and two columns of small entries on second row.          |
 |large-on-top-triple|One row of large entry on top and three columns of small entries on second row.      |
 |large-on-top-quadruple|One row of large entry on top and four columns of small entries on second row.    |
+|layered-on-middle|Three rows one large entry on row 1 and 3. two smaller entries on middle row.          |
+|layered-on-corners|Three rows two smaller entries on row 1 and 3. One large entry on middle row.         |
+|random           |Will pick any one of the above layouts in random based on number of entries in gallery.|
 
 ## Events
 You can register to receive the following events:
@@ -135,6 +140,7 @@ You can register to receive the following events:
 
 | Version | Description                                                                                   |
 |---------|-----------------------------------------------------------------------------------------------|
+| 1.0.12  | Added more layouts and a new random layout option to add spice into the display area!!        |
 | 1.0.11  | Added a new layout saw on Facebook.                                                           |
 | 1.0.10  | Worked on hover message font-size as well as remaining count font size and vertical position. |
 | 1.0.9   | Resolved problem of displaying video startup image on mobile and added magnifyImageEnabled attribute. |

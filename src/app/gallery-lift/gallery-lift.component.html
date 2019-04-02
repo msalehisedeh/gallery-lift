@@ -4,6 +4,8 @@
         (keyup)="keyup($event)"
         (click)="liftUpImagery(i)"
         class="view"
+        [style.border]='borderOnView'
+        [style.min-height]='minHeightOf(i)'
         [style.max-height]='maxHeightOf(i)'
         [attr.tabindex]="liftup ? -1: 0">
         <span class="off-screen" *ngIf="template && gallery[i].data">

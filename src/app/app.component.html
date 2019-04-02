@@ -21,14 +21,20 @@
     <label for="large-on-top"><input id="large-on-top" name="viewOption" type="radio" [checked]="viewOption === 'large-on-top-double'" (click)="viewOption = 'large-on-top'" />large-on-top</label>
     <label for="large-on-top-triple"><input id="large-on-top-triple" name="viewOption" type="radio" [checked]="viewOption === 'large-on-top-triple'" (click)="viewOption = 'large-on-top-triple'" />large-on-top-triple</label>
     <label for="large-on-top-quadruple"><input id="large-on-top-quadruple" name="viewOption" type="radio" [checked]="viewOption === 'large-on-top-quadruple'" (click)="viewOption = 'large-on-top-quadruple'" />large-on-top-quadruple</label>
+    <label for="layered-on-middle"><input id="layered-on-middle" name="viewOption" type="radio" [checked]="viewOption === 'layered-on-middle'" (click)="viewOption = 'layered-on-middle'" />layered-on-middle</label>
+    <label for="layered-on-corners"><input id="layered-on-corners" name="viewOption" type="radio" [checked]="viewOption === 'layered-on-corners'" (click)="viewOption = 'layered-on-corners'" />layered-on-corners</label>
+    <label for="random"><input id="random" name="viewOption" type="radio" [checked]="viewOption === 'random'" (click)="viewOption = 'random'" />random</label>
   </fieldset>
   <fieldset>
     <legend>Preview policy</legend>
     <label for="hoverMessage">Hover Message: 
-      <input id="hoverMessage" name="hoverMessage" [value]="hoverMessage" (keyup)="hoverMessage = $event.target.value" />
+      <input id="hoverMessage" name="hoverMessage" [style.width]="'100px'" [value]="hoverMessage" (keyup)="hoverMessage = $event.target.value" />
     </label>
     <label for="maxHeight">Max Height: 
-      <input id="maxHeight" name="maxHeight" [value]="maxHeight" (keyup)="maxHeight = $event.target.value" />
+      <input id="maxHeight" name="maxHeight" [style.width]="'50px'" [value]="maxHeight" (keyup)="maxHeight = $event.target.value" />
+    </label>
+    <label for="border">Border: 
+      <input id="border" name="border" [style.width]="'100px'" [value]="border" (keyup)="border = $event.target.value" />
     </label>
     <label for="showTitleOnHover">
       <input id="showTitleOnHover" name="showTitleOnHover" type="checkbox" [checked]="showTitleOnHover === true" (change)="showTitleOnHover = !showTitleOnHover" />
@@ -67,6 +73,7 @@
   [showMessageOnHover]="showMessageOnHover"
   [maxHeight]="maxHeight"
   [showTitleOnHover]="showTitleOnHover"
+  [borderOnView]="border"
   [layout]="viewOption"
   [liftOnZero]="liftOnZero"
   [showRemainingCount]="showRemainingCount"

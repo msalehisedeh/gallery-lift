@@ -12,6 +12,7 @@ export class AppComponent {
   viewOption = 'large-on-right';
   hoverMessage='View Gallery...';
   liftOnZero = true;
+  border = '1px solid white';
   showMessageOnHover = true;
   showRemainingCount = true;
   showTitleOnHover = true;
