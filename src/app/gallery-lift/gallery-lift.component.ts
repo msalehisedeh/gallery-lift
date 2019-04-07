@@ -17,6 +17,7 @@ import {
 })
 export class GalleryLiftComponent implements OnChanges {
   layList = [1];
+  loaded = true;
   displayType = 'c1';
   selectedIndex = 0;
   host = undefined;
@@ -38,12 +39,12 @@ export class GalleryLiftComponent implements OnChanges {
   @Input() template: any;
   @Input() borderOnView = null;
   @Input() maxHeight = 400;
+  @Input() animationType = 'none';
   @Input() hoverMessage = 'See more...';
   @Input() layout = 'large-on-single';
   
   constructor(el: ElementRef, private cdr: ChangeDetectorRef) {
     this.host = el.nativeElement;
-    this.host.setAttribute("class", "mobile");
     if (navigator.platform.toUpperCase().indexOf('MAC')<0) {
       document.addEventListener("webkitfullscreenchange", (event: Event) => {
         if(!window.screenTop && !window.screenY) {
@@ -269,7 +270,11 @@ export class GalleryLiftComponent implements OnChanges {
     return max + 'px';
   }
   previous() {
-    this.selectedIndex = this.selectedIndex - 1;
+    this.loaded = false;
+    this.cdr.detectChanges();
+    this.selectedIndex = this.selectedIndex > 0 ? this.selectedIndex - 1 : this.gallery.length - 1;
+    this.loaded = true;
+    this.cdr.detectChanges();
     this.onaction.emit({
       action: "view previous",
       index: this.selectedIndex,
@@ -277,7 +282,11 @@ export class GalleryLiftComponent implements OnChanges {
 		});
   }
   next() {
-    this.selectedIndex = this.selectedIndex + 1;
+    this.loaded = false;
+    this.cdr.detectChanges();
+    this.selectedIndex = this.selectedIndex < this.gallery.length - 1 ? this.selectedIndex + 1 : 0;
+    this.loaded = true;
+    this.cdr.detectChanges();
     this.onaction.emit({
       action: "view next",
       index: this.selectedIndex,
@@ -329,7 +338,7 @@ export class GalleryLiftComponent implements OnChanges {
       this.focused = true;
       closeButton.focus();
     }
-    return this.selectedIndex < this.gallery.length - 1;
+    return true;
   }
   keyup(event: any) {
 		const code = event.which;

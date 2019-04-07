@@ -17,6 +17,7 @@ DEPENDENCIES:
 <gallery-lift
   [hoverMessage]="hoverMessage"
   [sideBySide]="true"
+  [animationType]="animationType"
   [showMessageOnHover]="showMessageOnHover"
   [magnifyImageEnabled]="magnifyImageEnabled"
   [maxHeight]="maxHeight"
@@ -45,6 +46,8 @@ DEPENDENCIES:
 |gallery          | List of items to be in the display gallery.                                           |
 |liftOnZero       | Start from zero index when lifting the gallery or from the index of entry which is selected. |
 |sideBySide       | Arrange the entry and content side by side or vertical.                               |
+|animationType    | Performing animation type when view gallery details on next and previous button clicks. |
+|                 | Options are: 'none', 'fade', 'zoom', 'shake', 'grayout', 'sepia'                      |
 |magnifyImageEnabled| Enable image magnification on mobile.                                               |
 |showRemainingCount| Show the remaining number of entries on last item of preview pane.                   |
 |showTitleOnHover | Show the entry title on hover over preview pane.                                      |
@@ -52,7 +55,8 @@ DEPENDENCIES:
 |hoverMessage     | set the view more message to be displayed on hover over preview pane.                 |
 |maxHeight        | set the maximum height of the preview pane. Default is 400 pixels.                    |
 |borderOnView     | Specify border separation around each view. Default is null.                          |
-|layout           | How to display items in the preview pane. options are 'large-on-single', 'split-on-dual', 'large-on-right', 'split-on-quadruple', 'large-on-middle', 'large-on-left', 'large-on-sides'           |
+|layout           | How to display items in the preview pane.                                             |
+|                 | Options are: 'large-on-single', 'split-on-dual', 'large-on-right', 'split-on-quadruple', 'large-on-middle', 'large-on-left', 'large-on-sides'           |
 
 ## Layouts
 
@@ -140,6 +144,7 @@ You can register to receive the following events:
 
 | Version | Description                                                                                   |
 |---------|-----------------------------------------------------------------------------------------------|
+| 1.0.14  | ast checkin i had a value applied on css causing display problem for details information text. Also, added animation types as option for gallery lift entry views. |
 | 1.0.13  | Fixed the position of "+ remaining counter" on the last entry.                                |
 | 1.0.12  | Added more layouts and a new random layout option to add spice into the display area!!        |
 | 1.0.11  | Added a new layout saw on Facebook.                                                           |

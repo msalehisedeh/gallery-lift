@@ -368,6 +368,83 @@
       }
     }
   }
+  .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+  
+  @-webkit-keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+  }
+  
+  @keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+  }
+  .grayout {
+    -webkit-animation-name: grayout;
+    -webkit-animation-duration: .2s;
+    animation-name: grayout;
+    animation-duration: .2s;
+  }
+  
+  @-webkit-keyframes grayout {
+    from {filter:grayscale(.4)} 
+    to {filter:grayscale(1)}
+  }
+  
+  @keyframes grayout {
+    from {filter:grayscale(.4)} 
+    to {filter:grayscale(1)}
+  }
+  .sepia {
+    -webkit-animation-name: sepia;
+    -webkit-animation-duration: .2s;
+    animation-name: sepia;
+    animation-duration: .2s;
+  }
+  
+  @-webkit-keyframes sepia {
+    from {filter:sepia(.4)} 
+    to {filter:sepia(1)}
+  }
+  
+  @keyframes sepia {
+    from {filter:sepia(.4)} 
+    to {filter:sepia(1)}
+  }
+  .zoom {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: .3s;
+    animation-name: zoom;
+    animation-duration: .3s;
+  }
+  
+  @-webkit-keyframes zoom {
+    from {transform: scale(.98)} 
+    to {transform: scale(1)}
+  }
+  
+  @keyframes zoom {
+    from {transform: scale(.98)} 
+    to {transform: scale(1)}
+  }
+  .shake {
+    -webkit-animation-name: shake;
+    -webkit-animation-duration: .6s;
+    animation-name: shake;
+    animation-duration: .6s;
+  }
+  @keyframes shake {
+    10%, 90% {transform: translate3d(-1px, 0, 0);}
+    20%, 80% {transform: translate3d(2px, 0, 0);}
+    30%, 50%, 70% {transform: translate3d(-4px, 0, 0);}
+    40%, 60% {transform: translate3d(4px, 0, 0);}
+  }
+
   @media only screen and (max-width: 600px) {
     .lift {
       .lifter {

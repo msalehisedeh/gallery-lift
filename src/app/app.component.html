@@ -51,9 +51,19 @@
   </fieldset>
   <fieldset>
     <legend>Lift policy</legend>
+    <label for="animation">Animation:
+      <select id="animation" name="animation" (change)="animationType = $event.target.value">
+          <option value='none' [selected]="animationType === 'none' ? true : null">none</option>
+          <option value='fade' [selected]="animationType === 'fade' ? true : null">fade</option>
+          <option value='zoom' [selected]="animationType === 'zoom' ? true : null">zoom</option>
+          <option value='shake' [selected]="animationType === 'shake' ? true : null">shake</option>
+          <option value='grayout' [selected]="animationType === 'grayout' ? true : null">grayout</option>
+          <option value='sepia' [selected]="animationType === 'sepia' ? true : null">sepia</option>
+        </select>
+    </label>
     <label for="liftOnZero">
-      <input id="liftOnZero" name="liftOnZero" type="checkbox" [checked]="liftOnZero === true" (change)="liftOnZero = !liftOnZero" />
-      Lift On Zero
+        <input id="liftOnZero" name="liftOnZero" type="checkbox" [checked]="liftOnZero === true" (change)="liftOnZero = !liftOnZero" />
+        Lift On Zero
     </label>
     <label for="sideBySide">
       <input id="sideBySide" name="sideBySide" type="checkbox" [checked]="sideBySide === true" (change)="sideBySide = !sideBySide" />
@@ -68,6 +78,7 @@
   
 <gallery-lift
   [sideBySide]="sideBySide"
+  [animationType]="animationType"
   [hoverMessage]="hoverMessage"
   [magnifyImageEnabled]="magnifyImageEnabled"
   [showMessageOnHover]="showMessageOnHover"

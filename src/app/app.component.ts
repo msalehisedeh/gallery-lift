@@ -17,6 +17,7 @@ export class AppComponent {
   showRemainingCount = true;
   showTitleOnHover = true;
   magnifyImageEnabled = false;
+  animationType = 'none';
   sideBySide = true;
 
   myGallery= [{

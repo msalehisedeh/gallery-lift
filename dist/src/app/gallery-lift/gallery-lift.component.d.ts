@@ -2,6 +2,7 @@ import { OnChanges, ElementRef, ChangeDetectorRef, EventEmitter } from '@angular
 export declare class GalleryLiftComponent implements OnChanges {
     private cdr;
     layList: number[];
+    loaded: boolean;
     displayType: string;
     selectedIndex: number;
     host: any;
@@ -21,6 +22,7 @@ export declare class GalleryLiftComponent implements OnChanges {
     template: any;
     borderOnView: any;
     maxHeight: number;
+    animationType: string;
     hoverMessage: string;
     layout: string;
     constructor(el: ElementRef, cdr: ChangeDetectorRef);

@@ -33,8 +33,7 @@
 </div>
 <div class="lift" [class.piled]="!sideBySide" *ngIf="liftup">
     <div class="left-controls">
-        <a *ngIf="selectedIndex>0" 
-            title="View previous"
+        <a title="View previous"
             class="prev fa fa-chevron-left" tabindex="0"
             (keyup)="keyup($event)"
             (click)="previous()"></a>
@@ -42,17 +41,21 @@
     <div class="lifter" 
         [class.vertical]="!sideBySide"
         [class.fullscreen]="expanded">
-        <div class="lift-view" [class.magnified]="magnified" #liftView
+        <div #liftView
+            class="lift-view" 
+            [class.magnified]="magnified" 
             (touchmove)="touchHover($event)"
             (mouseover)="hoverOver($event)"><img 
-                *ngIf="gallery[selectedIndex].type === undefined || gallery[selectedIndex].type === 'image'"  
+                *ngIf="loaded && (gallery[selectedIndex].type === undefined || gallery[selectedIndex].type === 'image')"  
                 aria-hidden="true"
                 width="100%" 
                 height="100%" 
+                [class]="animationType"
                 [src]="gallery[selectedIndex].src" /><video 
 
-                *ngIf="gallery[selectedIndex].type === 'video'" 
+                *ngIf="loaded && gallery[selectedIndex].type === 'video'" 
                 width="100%" 
+                [class]="animationType"
                 [attr.src]="gallery[selectedIndex].src" 
                 [attr.poster]="gallery[selectedIndex].poster ? gallery[selectedIndex].poster : null"
                 (play)="videoEvent($event)"
