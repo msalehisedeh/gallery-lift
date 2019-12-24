@@ -18,7 +18,9 @@ export class AppComponent {
   showTitleOnHover = true;
   magnifyImageEnabled = false;
   animationType = 'none';
+  slideEnabled = true;
   sideBySide = true;
+  dimOnHover = true;
 
   myGallery= [{
     data: {

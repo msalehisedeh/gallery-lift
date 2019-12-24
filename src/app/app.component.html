@@ -48,6 +48,10 @@
       <input id="showRemainingCount" name="showRemainingCount" type="checkbox" [checked]="showRemainingCount === true" (change)="showRemainingCount = !showRemainingCount" />
       Show Remaining Count
     </label>
+    <label for="showRemainingCount">
+      <input id="dimOnHover" name="dimOnHover" type="checkbox" [checked]="dimOnHover === true" (change)="dimOnHover = !dimOnHover" />
+      dim On Hover
+    </label>
   </fieldset>
   <fieldset>
     <legend>Lift policy</legend>
@@ -69,6 +73,10 @@
       <input id="sideBySide" name="sideBySide" type="checkbox" [checked]="sideBySide === true" (change)="sideBySide = !sideBySide" />
       Show imagery and info side by side
     </label>
+    <label for="slideEnabled">
+      <input id="slideEnabled" name="slideEnabled" type="checkbox" [checked]="slideEnabled === true" (change)="slideEnabled = !slideEnabled" />
+      Enable slide when swapping items
+    </label>
     <label for="magnifyImageEnabled">
       <input id="magnifyImageEnabled" name="magnifyImageEnabled" type="checkbox" [checked]="magnifyImageEnabled === true" (change)="magnifyImageEnabled = !magnifyImageEnabled" />
       Show Magnify Image button On Mobile
@@ -83,6 +91,8 @@
   [magnifyImageEnabled]="magnifyImageEnabled"
   [showMessageOnHover]="showMessageOnHover"
   [maxHeight]="maxHeight"
+  [slideEnabled]="slideEnabled"
+  [dimOnHover]="dimOnHover"
   [showTitleOnHover]="showTitleOnHover"
   [borderOnView]="border"
   [layout]="viewOption"

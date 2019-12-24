@@ -4,16 +4,19 @@
         (keyup)="keyup($event)"
         (click)="liftUpImagery(i)"
         class="view"
+        attr.tabindex="0"
+        [class.dim-on-hover]="dimOnHover"
         [style.border]='borderOnView'
-        [style.min-height]='minHeightOf(i)'
-        [style.max-height]='maxHeightOf(i)'
-        [attr.tabindex]="liftup ? -1: 0">
+        [style.min-height]='maxHeightOf(i)'
+        [style.max-height]='maxHeightOf(i)'>
         <span class="off-screen" *ngIf="template && gallery[i].data">
             <ng-container 
                 [ngTemplateOutlet]="template" 
                 [ngTemplateOutletContext]="{data: gallery[i].data, selected: i+1, total: gallery.length}"></ng-container>
         </span>
-        <div *ngIf="showTitleOnHover && gallery[i].data && gallery[i].data.title" class="title">{{gallery[i].data.title}}</div>
+        <div 
+            *ngIf="((showTitleOnHover && i !== (layList.length - 1)) || (!showRemainingCount && i === (layList.length - 1))) && gallery[i].data && gallery[i].data.title" 
+            class="title">{{gallery[i].data.title}}</div>
         <img *ngIf="gallery[i].type === undefined || gallery[i].type === 'image'" aria-hidden="true" width="100%"  [src]="gallery[i].src" />
         <video width="100%" 
             *ngIf="gallery[i].type === 'video'"
@@ -21,93 +24,17 @@
             [attr.src]="gallery[i].src" disabled></video>
         <div *ngIf="showRemainingCount  && i === (layList.length - 1)" 
             class="counter"
+            [style.min-height]='maxHeightOf(i)'
+            [style.max-height]='maxHeightOf(i)'
             [style.padding-top]="evalTop()">
             + {{gallery.length - i - 1}}
             <span class="off-screen">more entries</span>
         </div>
-        <div *ngIf="showMessageOnHover" class="more">
+        <div 
+            *ngIf="(showMessageOnHover && i !== (layList.length - 1)) || (!showRemainingCount && i === (layList.length - 1))" 
+            class="more"> 
             {{hoverMessage}}
             <span aria-hidden="true" class="enlarge fa fa-clone" *ngIf="layout === 'large-on-single'"></span>
         </div>
-    </div>
-</div>
-<div class="lift" [class.piled]="!sideBySide" *ngIf="liftup">
-    <div class="left-controls">
-        <a title="View previous"
-            class="prev fa fa-chevron-left" tabindex="0"
-            (keyup)="keyup($event)"
-            (click)="previous()"></a>
-    </div>
-    <div class="lifter" 
-        [class.vertical]="!sideBySide"
-        [class.fullscreen]="expanded">
-        <div #liftView
-            class="lift-view" 
-            [class.magnified]="magnified" 
-            (touchmove)="touchHover($event)"
-            (mouseover)="hoverOver($event)"><img 
-                *ngIf="loaded && (gallery[selectedIndex].type === undefined || gallery[selectedIndex].type === 'image')"  
-                aria-hidden="true"
-                width="100%" 
-                height="100%" 
-                [class]="animationType"
-                [src]="gallery[selectedIndex].src" /><video 
-
-                *ngIf="loaded && gallery[selectedIndex].type === 'video'" 
-                width="100%" 
-                [class]="animationType"
-                [attr.src]="gallery[selectedIndex].src" 
-                [attr.poster]="gallery[selectedIndex].poster ? gallery[selectedIndex].poster : null"
-                (play)="videoEvent($event)"
-                (pause)="videoEvent($event)"
-                (ended)="videoEvent($event)"
-                (seeked)="videoEvent($event)"
-                (error)="videoEvent($event)"
-                (fullscreenchange)="videoEvent($event)"
-                controls></video>
-        </div>
-        <div class="lift-info" *ngIf="template && gallery[selectedIndex].data">
-            <ng-container 
-                [ngTemplateOutlet]="template" 
-                [ngTemplateOutletContext]="{data: gallery[selectedIndex].data, selected: selectedIndex+1, total: gallery.length}"></ng-container>
-        </div>
-    </div>
-    <div class="right-controls">
-        <a tabindex="0"  #closeButton
-            class="close fa fa-close" 
-            title="Close viewer"
-            (click)="liftDownImagery()" 
-            (keyup)="keyup($event)"></a>
-        <span class="top-wrap">
-            <a class="fa" tabindex="0"
-                (click)="fullScreen()" 
-                (keyup)="keyup($event)"
-                [attr.title]="expanded ? 'Normal screen view' : 'Full screen view'"
-                [class.fa-expand]="!expanded" 
-                [class.fa-compress]="expanded"></a>
-            <a *ngIf="magnifyImageEnabled" class="magnify fa" tabindex="0"
-                (click)="magnify(liftView)" 
-                (keyup)="keyup($event)"
-                [attr.title]="magnified ? 'Normal Image' : 'Magnify Image'"
-                [class.fa-expand]="!magnified" 
-                [class.fa-compress]="magnified"></a>
-            <a *ngIf="template && gallery[selectedIndex].data"
-                class="fa" tabindex="0"
-                (click)="sideBySide = !sideBySide" 
-                (keyup)="keyup($event)"
-                [attr.title]="sideBySide ? 'Align Vertical' : 'Align Horizontal'"
-                [class.fa-columns]="!sideBySide" 
-                [class.fa-bars]="sideBySide"></a>
-            <a [href]="gallery[selectedIndex].src" 
-                tabindex="0" title="download" 
-                class="download fa fa-download" 
-                (keyup)="keyup($event)"
-                download></a>
-        </span>
-        <a *ngIf="showMore(closeButton)" 
-            title="View next"
-            class="next fa fa-chevron-right" tabindex="0" 
-            (keyup)="keyup($event)"
-            (click)="next()"></a>
     </div>
 </div>

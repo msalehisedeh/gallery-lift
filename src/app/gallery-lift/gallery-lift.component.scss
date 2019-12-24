@@ -12,151 +12,6 @@
     left: -99999px;
     top: -99999px;
   }
-  .lift {
-    width: 100%;
-    height: 100%;
-    min-height: 300px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: row;
-    z-index: 99;
-    background-color: rgba(0,0,0,0.95);
-    .left-controls {
-      width: 30px;
-      height: 100vh;
-      color: #fff;
-      background-color: transparent;
-      padding: 20% 0;
-      box-sizing: border-box;
-      position: relative;
-      .prev {
-        top: 50%;
-        width: 22px;
-        left: 8px;
-      }
-      a {
-        font-size: 1.8rem;
-        cursor: pointer;
-        text-align: center;
-        width: 100%;
-        position: absolute;
-        display: flex;
-        &:hover {
-          color: #ccc;
-        }
-      }
-    }
-    .lifter {
-      flex: 1;
-      display: flex;
-      flex-direction: row;
-      .lift-view {
-        flex: 1;
-        margin: 20px;
-        border: 2px solid #d1e4be;
-        position:relative;
-        background-color: #fff;
-        img {
-          position:relative;
-        }
-      }
-      .lift-info {
-        width: 300px;
-        background-color: #fff;
-        margin: 20px 15px 16px 15px;
-        padding: 10px;
-        border: 2px solid #d1e4be;
-      }
-
-      &.vertical {
-        flex-direction: column;
-        display: block;
-        .lift-info {
-          width: auto;
-          height: 200px;
-          margin: 20px;
-          overflow-y: auto;
-        }
-      }
-    }
-    .right-controls {
-      width: 30px;
-      height: 100vh;
-      color: #fff;
-      background-color: transparent;
-      display: flex;
-      flex-direction: column;
-      padding: 20% 0;
-      box-sizing: border-box;
-      position: relative;
-      .close {
-        position: absolute;
-        right: 0;
-        top: 5px;
-        width: 33px;
-      }
-      .top-wrap {
-        position: absolute;
-        top: 40px;
-        right: 2px;
-        .magnify {
-          display: none;
-          width: 33px;
-          font-size: 1.5rem;
-          margin-bottom: 8px;
-        }
-        .fa-expand, .fa-compress {
-          width: 33px;
-          font-size: 1.5rem;
-          margin-bottom: 8px;
-        }
-        .fa-columns, .fa-bars {
-          width: 33px;
-          font-size: 1.5rem;
-          margin-bottom: 8px;
-        }
-        .download {
-          font-size: 1.5rem;
-          width: 33px;
-          color: #fff;
-          margin-bottom: 8px;
-        }
-      }
-      .next {
-        top: 50%;
-        width: 22px;
-        position: absolute;
-      }
-      a {
-        font-size: 1.8rem;
-        cursor: pointer;
-        text-align: center;
-        width: 100%;
-        &:hover {
-          color: #ccc;
-        }
-      }
-    }
-    &.piled {
-      position: absolute;
-      height: inherit;
-      .lifter {
-        &.vertical {
-          .lift-info {
-            margin: 20px;
-          }
-        }
-        &.fullscreen {
-          .lift-view, .lift-info {
-            margin: 20;
-            height: auto;
-          }
-        }
-      }
-    }
-  }
   .viewport {
     display: inline-grid;
     grid-gap: 0;
@@ -176,13 +31,15 @@
       cursor: pointer;
       &:hover,
       &:focus {
-        -webkit-filter: brightness(80%);
-        -moz-filter: brightness(80%);
-        -o-filter: brightness(80%);
-        -ms-filter: brightness(80%);
-        filter: brightness(80%);
+        &.dim-on-hover {
+          -webkit-filter: brightness(80%);
+          -moz-filter: brightness(80%);
+          -o-filter: brightness(80%);
+          -ms-filter: brightness(80%);
+          filter: brightness(80%);
+        }
         .more, .title {
-          display: inline;
+          opacity: 1;
         }
       }
       .counter {
@@ -197,9 +54,10 @@
         box-sizing: border-box;
       }
       .title {
-        display: none;
+        opacity: 0;
         width: 100%;
         background-color: rgba(0,0,0,0.7);
+        transition: 0.3s ease-out;
         color: white;
         position: absolute;
         left: 0;
@@ -209,9 +67,10 @@
         z-index: 2;
       }
       .more {
-        display: none;
+        opacity: 0;
         width: 100%;
         background-color: rgba(0,0,0,0.7);
+        transition: 0.3s ease-out;
         color: white;
         position: absolute;
         left: 0;
@@ -332,149 +191,6 @@
        'tr br';
       .title, .more {
         font-size: 0.9rem;
-      }
-    }
-  }
-  &.mobile {
-    .lift {
-      .lifter {
-        flex-direction: column;
-        .lift-view {
-          flex: unset;
-          &.magnified {
-            overflow: auto;
-          }
-        }
-        .lift-info {
-          width: auto;
-          margin: 20px;
-          flex: 1;
-          overflow-y: auto;
-        }
-      }
-      .right-controls {
-        .top-wrap {
-          .fa-expand, .fa-compress {
-            display: none;
-            &.magnify { display: inline-block; }
-          }
-          .fa-columns, .fa-bars {
-            display: none;
-          }
-        }
-      }
-      &.piled {
-        position: fixed !important;
-      }
-    }
-  }
-  .fade {
-    -webkit-animation-name: fade;
-    -webkit-animation-duration: 1.5s;
-    animation-name: fade;
-    animation-duration: 1.5s;
-  }
-  
-  @-webkit-keyframes fade {
-    from {opacity: .4} 
-    to {opacity: 1}
-  }
-  
-  @keyframes fade {
-    from {opacity: .4} 
-    to {opacity: 1}
-  }
-  .grayout {
-    -webkit-animation-name: grayout;
-    -webkit-animation-duration: .2s;
-    animation-name: grayout;
-    animation-duration: .2s;
-  }
-  
-  @-webkit-keyframes grayout {
-    from {filter:grayscale(.4)} 
-    to {filter:grayscale(1)}
-  }
-  
-  @keyframes grayout {
-    from {filter:grayscale(.4)} 
-    to {filter:grayscale(1)}
-  }
-  .sepia {
-    -webkit-animation-name: sepia;
-    -webkit-animation-duration: .2s;
-    animation-name: sepia;
-    animation-duration: .2s;
-  }
-  
-  @-webkit-keyframes sepia {
-    from {filter:sepia(.4)} 
-    to {filter:sepia(1)}
-  }
-  
-  @keyframes sepia {
-    from {filter:sepia(.4)} 
-    to {filter:sepia(1)}
-  }
-  .zoom {
-    -webkit-animation-name: zoom;
-    -webkit-animation-duration: .3s;
-    animation-name: zoom;
-    animation-duration: .3s;
-  }
-  
-  @-webkit-keyframes zoom {
-    from {transform: scale(.98)} 
-    to {transform: scale(1)}
-  }
-  
-  @keyframes zoom {
-    from {transform: scale(.98)} 
-    to {transform: scale(1)}
-  }
-  .shake {
-    -webkit-animation-name: shake;
-    -webkit-animation-duration: .6s;
-    animation-name: shake;
-    animation-duration: .6s;
-  }
-  @keyframes shake {
-    10%, 90% {transform: translate3d(-1px, 0, 0);}
-    20%, 80% {transform: translate3d(2px, 0, 0);}
-    30%, 50%, 70% {transform: translate3d(-4px, 0, 0);}
-    40%, 60% {transform: translate3d(4px, 0, 0);}
-  }
-
-  @media only screen and (max-width: 600px) {
-    .lift {
-      .lifter {
-        flex-direction: column;
-        .lift-view {
-          flex: unset;
-          &.magnified {
-            overflow: auto;
-          }
-        }
-        .lift-info {
-          width: auto;
-          margin: 20px;
-          flex: 1;
-          overflow-y: auto;
-        }
-      }
-      .right-controls {
-        .top-wrap {
-          .fa-expand, .fa-compress {
-            display: none;
-            &.magnify { display: inline-block; }
-          }
-          .fa-columns, .fa-bars {
-            display: none;
-          }
-        }
-      }
-      &.piled {
-        position: fixed !important;
       }
     }
   }

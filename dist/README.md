@@ -2,6 +2,8 @@
 
 Have you ever wanted a gallery view that can display images and videos the way you want it? gallery lift is a configurable tool that allows you to pick and choose how your gallery is displayed.
 
+**NOTE:** Added  `appRootName` attribute for ADA compliancy to be used for turning off all key actions when lift modal view is displayed. Default value for `appRootName` is `app-root`. When the modal gallery lift is created, it will be pushed in root body tag siblling to the angualr app root. If you are using a different tag name other than `app-root`, you should pass it to gallery-lift component.
+
 Please send your requests or comments through the link provided below:
 
 [Live Demo](https://gallery-lift.stackblitz.io) | [Source code](https://github.com/msalehisedeh/gallery-lift/tree/master/src/app) | [Comments/Requests](https://github.com/msalehisedeh/gallery-lift/issues)
@@ -17,6 +19,7 @@ DEPENDENCIES:
 <gallery-lift
   [hoverMessage]="hoverMessage"
   [sideBySide]="true"
+  [appRootName]="app-root"
   [animationType]="animationType"
   [showMessageOnHover]="showMessageOnHover"
   [magnifyImageEnabled]="magnifyImageEnabled"
@@ -42,10 +45,12 @@ DEPENDENCIES:
 
 | Attribute       |Details                                                                                |
 |-----------------|---------------------------------------------------------------------------------------|
+|appRootName      | Angular app root tag name. default is 'app-root'. When the modal gallery lift is created, it will be pushed in root body tag siblling to the angualr app root. If you are using a different tag name other than 'app-root', you should pass it to this component. |
 |template         | template to be used to display detail information about an item.                      |
 |gallery          | List of items to be in the display gallery.                                           |
 |liftOnZero       | Start from zero index when lifting the gallery or from the index of entry which is selected. |
 |sideBySide       | Arrange the entry and content side by side or vertical.                               |
+|slideEnabled     | Allow sliding of items when swapping between them.                                    |
 |animationType    | Performing animation type when view gallery details on next and previous button clicks. |
 |                 | Options are: 'none', 'fade', 'zoom', 'shake', 'grayout', 'sepia'                      |
 |magnifyImageEnabled| Enable image magnification on mobile.                                               |
@@ -144,6 +149,9 @@ You can register to receive the following events:
 
 | Version | Description                                                                                   |
 |---------|-----------------------------------------------------------------------------------------------|
+| 2.0.0   | Udated to Angular 8.                                                                          |
+| 1.0.16  | Added ability to slide between items. fixed issues on positioning of counter and hover message.|
+| 1.0.15  | Added key event trap to keep tabs on the gallery view till close button is clicked.           |
 | 1.0.14  | ast checkin i had a value applied on css causing display problem for details information text. Also, added animation types as option for gallery lift entry views. |
 | 1.0.13  | Fixed the position of "+ remaining counter" on the last entry.                                |
 | 1.0.12  | Added more layouts and a new random layout option to add spice into the display area!!        |

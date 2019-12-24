@@ -1,0 +1,105 @@
+
+<div class="lift" [class.piled]="!sideBySide">
+    <div class="left-controls">
+        <a title="View previous"
+            class="prev fa fa-chevron-left" 
+            tabindex="0"
+            (keyup)="keyup($event)"
+            (click)="previous()"></a>
+    </div>
+    <div class="lifter" 
+        [class.vertical]="!sideBySide"
+        [class.fullscreen]="expanded">
+        <div #liftView
+            class="lift-view" 
+            [class.magnified]="magnified">
+            <div class="lift-item" 
+                *ngFor="let item of gallery; let i = index"
+                [style.z-index]="selectedIndex == i ? 1 : 0"
+                [attr.aria-live]="smallScreen ? null : 'polite'"
+                [attr.aria-atomic]="smallScreen ? null : true"
+                [attr.aria-hidden]="!smallScreen && selectedIndex !== i"
+                [class.left-side]="slideEnabled && tracks[i].leftSide ? true : null"
+                [class.right-side]="slideEnabled && tracks[i].rightSide ? true : null"
+                [class.slide-in-to-left]="slideEnabled && tracks[i].action === 'slideInToLeft' ? true : null"
+                [class.slide-in-to-right]="slideEnabled && tracks[i].action === 'slideInToRight' ? true : null"
+                [class.slide-out-to-left]="slideEnabled && tracks[i].action === 'slideOutToLeft' ? true : null"
+                [class.slide-out-to-right]="slideEnabled && tracks[i].action === 'slideOutToRight' ? true : null" 
+                (touchmove)="touchHover($event)"
+                (mouseover)="hoverOver($event)"><img 
+                *ngIf="loaded && (gallery[i].type === undefined || gallery[i].type === 'image')"  
+                aria-hidden="true"
+                width="100%" 
+                [class]="animationType"
+                [src]="gallery[i].src" /><video 
+
+                *ngIf="loaded && gallery[i].type === 'video'" 
+                width="100%" 
+                [class]="animationType"
+                [attr.src]="gallery[i].src" 
+                [attr.poster]="gallery[i].poster ? gallery[i].poster : null"
+                (play)="videoEvent($event)"
+                (pause)="videoEvent($event)"
+                (ended)="videoEvent($event)"
+                (seeked)="videoEvent($event)"
+                (error)="videoEvent($event)"
+                (fullscreenchange)="videoEvent($event)"
+                controls></video>
+                <div class="lift-info off-screen" [attr.aria-hidden]="selectedIndex !== i" *ngIf="template && gallery[i].data">
+                    <ng-container 
+                        [ngTemplateOutlet]="template" 
+                        [ngTemplateOutletContext]="{data: gallery[i].data, selected: i+1, total: gallery.length}"></ng-container>
+                </div>
+            </div>
+        </div>
+        <div 
+            class="lift-info" 
+            aria-hidden="true"
+             *ngIf="template && gallery[selectedIndex].data">
+            <ng-container 
+                [ngTemplateOutlet]="template" 
+                [ngTemplateOutletContext]="{data: gallery[selectedIndex].data, selected: selectedIndex+1, total: gallery.length}">
+            </ng-container>
+        </div>
+    </div>
+    <div class="right-controls">
+        <a #closeButton [class.focused]="checkFocused(closeButton)"
+            tabindex="0"  
+            class="close fa fa-close" 
+            title="Close viewer"
+            (click)="liftDownImagery()" 
+            (keyup)="keyup($event)"></a>
+        <span class="top-wrap">
+            <a class="fa" tabindex="0"
+                (click)="fullScreen()" 
+                (keyup)="keyup($event)"
+                [attr.title]="expanded ? 'Normal screen view' : 'Full screen view'"
+                [class.fa-expand]="!expanded" 
+                [class.fa-compress]="expanded"></a>
+            <a *ngIf="magnifyImageEnabled" class="magnify fa" tabindex="0"
+                (click)="magnify(liftView)" 
+                (keyup)="keyup($event)"
+                [attr.title]="magnified ? 'Normal Image' : 'Magnify Image'"
+                [class.fa-expand]="!magnified" 
+                [class.fa-compress]="magnified"></a>
+            <a *ngIf="template && gallery[selectedIndex].data"
+                class="fa" tabindex="0"
+                (click)="sideBySide = !sideBySide" 
+                (keyup)="keyup($event)"
+                [attr.title]="sideBySide ? 'Align Vertical' : 'Align Horizontal'"
+                [class.fa-columns]="!sideBySide" 
+                [class.fa-bars]="sideBySide"></a>
+            <a [href]="gallery[selectedIndex].src" 
+                tabindex="0" title="download" 
+                class="download fa fa-download" 
+                (keyup)="keyup($event)"
+                download></a>
+        </span>
+        <a title="View next"
+            class="next fa fa-chevron-right" 
+            tabindex="0" 
+            (keyup)="keyup($event)"
+            (click)="next()"></a>
+    </div>
+    <span tabindex="0" (focus)="closeButton.focus()"></span>
+</div>

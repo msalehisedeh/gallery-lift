@@ -1,0 +1,370 @@
+:host {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.95);
+
+  .off-screen {
+    display:block;
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    left: -99999px;
+    top: -99999px;
+  }
+  .lift {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    position: absolute;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    .left-controls {
+      width: 30px;
+      height: 100vh;
+      color: #fff;
+      background-color: transparent;
+      padding: 20% 0;
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: 0;
+      .prev {
+        top: 50%;
+        width: 22px;
+        left: 8px;
+      }
+      a {
+        font-size: 1.8rem;
+        cursor: pointer;
+        text-align: center;
+        width: 100%;
+        position: absolute;
+        display: flex;
+        &:hover {
+          color: #ccc;
+        }
+      }
+    }
+    .lifter {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      margin: 0 30px; 
+      .lift-view {
+        flex: 1;
+        margin: 20px;
+        border: 2px solid #d1e4be;
+        position:relative;
+        background-color: #fff;
+        overflow: hidden;
+        .lift-item {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: #fff;
+          overflow: hidden;
+          img {
+            position:relative;
+            vertical-align: middle;
+          }
+          &.selected {left: 0;}
+          &.left-side {left: -100%;}
+          &.right-side {left: 100%;}
+          &.slide-in-to-left {
+            left: 0;
+            animation: slideInToLeft .5s cubic-bezier(0.420, 0.000, 0.580, 1.000);
+          }
+          &.slide-in-to-right {
+            left: 0;
+            animation: slideInToRight .5s cubic-bezier(0.420, 0.000, 0.580, 1.000);
+          }
+          &.slide-out-to-left {
+            left: -100%;
+            animation: slideOutToLeft .5s cubic-bezier(0.420, 0.000, 0.580, 1.000);
+          }
+          &.slide-out-to-right {
+            left: 100%;
+            animation: slideOutToRight .5s cubic-bezier(0.420, 0.000, 0.580, 1.000);
+          }
+        }
+      }
+      .lift-info {
+        width: 300px;
+        background-color: #fff;
+        margin: 20px 15px 16px 15px;
+        box-sizing: border-box;
+        padding: 10px;
+        border: 2px solid #d1e4be;
+      }
+
+      &.vertical {
+        flex-direction: column;
+        .lift-view {
+          height: 100%;
+        }
+        .lift-info {
+          width: auto;
+          margin: 20px;
+          overflow-y: auto;
+        }
+      }
+    }
+    .right-controls {
+      width: 30px;
+      height: 100vh;
+      color: #fff;
+      background-color: transparent;
+      display: flex;
+      flex-direction: column;
+      padding: 20% 0;
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      right: 0;
+      .close {
+        position: absolute;
+        right: 0;
+        top: 5px;
+        width: 33px;
+      }
+      .top-wrap {
+        position: absolute;
+        top: 40px;
+        right: 2px;
+        .magnify {
+          display: none;
+          width: 33px;
+          font-size: 1.5rem;
+          margin-bottom: 8px;
+        }
+        .fa-expand, .fa-compress {
+          width: 33px;
+          font-size: 1.5rem;
+          margin-bottom: 8px;
+        }
+        .fa-columns, .fa-bars {
+          width: 33px;
+          font-size: 1.5rem;
+          margin-bottom: 8px;
+        }
+        .download {
+          font-size: 1.5rem;
+          width: 33px;
+          color: #fff;
+          margin-bottom: 8px;
+        }
+      }
+      .next {
+        top: 50%;
+        width: 22px;
+        position: absolute;
+      }
+      a {
+        font-size: 1.8rem;
+        cursor: pointer;
+        text-align: center;
+        width: 100%;
+        &:hover {
+          color: #ccc;
+        }
+      }
+    }
+    &.piled {
+      position: absolute;
+      .lifter {
+        &.vertical {
+          .lift-info {
+            margin: 20px;
+          }
+        }
+        &.fullscreen {
+          .lift-view, .lift-info {
+            margin: 20;
+          }
+        }
+      }
+    }
+  }
+  &.mobile {
+    .lift {
+      .lifter {
+        flex-direction: column;
+        .lift-view {
+          flex: unset;
+          &.magnified {
+            .lift-item {
+              overflow: auto;
+              img {
+                width: 300%;
+              }
+            }
+          }
+        }
+        .lift-info {
+          width: auto;
+          margin: 20px;
+          flex: 1;
+          overflow-y: auto;
+        }
+      }
+      .right-controls {
+        .top-wrap {
+          .fa-expand, .fa-compress {
+            display: none;
+            &.magnify { display: inline-block; }
+          }
+          .fa-columns, .fa-bars {
+            display: none;
+          }
+        }
+      }
+      &.piled {
+        position: fixed !important;
+      }
+    }
+  }
+  .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+  
+  @-webkit-keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+  }
+  
+  @keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+  }
+  .grayout {
+    -webkit-animation-name: grayout;
+    -webkit-animation-duration: .2s;
+    animation-name: grayout;
+    animation-duration: .2s;
+  }
+  
+  @-webkit-keyframes grayout {
+    from {filter:grayscale(.4)} 
+    to {filter:grayscale(1)}
+  }
+  
+  @keyframes grayout {
+    from {filter:grayscale(.4)} 
+    to {filter:grayscale(1)}
+  }
+  .sepia {
+    -webkit-animation-name: sepia;
+    -webkit-animation-duration: .2s;
+    animation-name: sepia;
+    animation-duration: .2s;
+  }
+  
+  @-webkit-keyframes sepia {
+    from {filter:sepia(.4)} 
+    to {filter:sepia(1)}
+  }
+  
+  @keyframes sepia {
+    from {filter:sepia(.4)} 
+    to {filter:sepia(1)}
+  }
+  .zoom {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: .3s;
+    animation-name: zoom;
+    animation-duration: .3s;
+  }
+  
+  @-webkit-keyframes zoom {
+    from {transform: scale(.90)} 
+    to {transform: scale(1)}
+  }
+  
+  @keyframes zoom {
+    from {transform: scale(.90)} 
+    to {transform: scale(1)}
+  }
+  .shake {
+    -webkit-animation-name: shake;
+    -webkit-animation-duration: .6s;
+    animation-name: shake;
+    animation-duration: .6s;
+  }
+  @keyframes shake {
+    10%, 90% {transform: translate3d(-1px, 0, 0);}
+    20%, 80% {transform: translate3d(2px, 0, 0);}
+    30%, 50%, 70% {transform: translate3d(-4px, 0, 0);}
+    40%, 60% {transform: translate3d(4px, 0, 0);}
+  }
+  @keyframes slideInToRight {
+    0% {left: -100%;opacity: 0}
+    100% {left: 0;opacity: 1}
+  }
+  @keyframes slideOutToLeft {
+    0% {left: 0;opacity: 1}
+    100% {left: -100%;opacity: 0}
+  }
+  @keyframes slideInToLeft {
+    0% {left: 100%;opacity: 0}
+    100% {left: 0;opacity: 1}
+  }
+  @keyframes slideOutToRight {
+    0% {left: 0;opacity: 1}
+    100% {left: 100%;opacity: 0}
+  }    
+
+  @media only screen and (max-width: 600px) {
+    .lift {
+      .lifter {
+        flex-direction: column;
+        .lift-view {
+          flex: unset;
+          height: 140px !important;
+          &.magnified {
+            .lift-item {
+              overflow: auto;
+              img {
+                width: 300%;
+              }
+            }
+          }
+        }
+        .lift-info {
+          width: auto;
+          margin: 20px;
+          flex: 1;
+          overflow-y: auto;
+        }
+      }
+      .right-controls {
+        .top-wrap {
+          .fa-expand, .fa-compress {
+            display: none;
+            &.magnify { display: inline-block; }
+          }
+          .fa-columns, .fa-bars {
+            display: none;
+          }
+        }
+      }
+      &.piled {
+        position: fixed !important;
+      }
+    }
+  }
+}
